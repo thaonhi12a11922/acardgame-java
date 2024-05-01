@@ -2,6 +2,8 @@ package A_Card_Game;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.Color;
 import java.awt.Image;
@@ -20,9 +22,12 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 import A_Card_Game.Graphics.RoundedPanel;
+import A_Card_Game.Function.draw_random;
 
 
 public class Main {
+    static JLabel p1_first_card = new JLabel();
+    static JLabel p1_second_card = new JLabel();
     public static void main(String[] args) throws Exception{
 
         MyFrame myFrame = new MyFrame();
@@ -102,11 +107,11 @@ public class Main {
         player1.setBounds(476, 600, 1000, 170);
         player1.setBackground(new Color(26, 145, 85));
 
-        JLabel p1_first_card = new JLabel();
+        // JLabel p1_first_card = new JLabel();
         p1_first_card.setIcon(white_card);
         p1_first_card.setBounds(476, 600, 119, 159);
 
-        JLabel p1_second_card = new JLabel();
+        // JLabel p1_second_card = new JLabel();
         p1_second_card.setIcon(white_card);
         p1_second_card.setBounds(648, 600, 119, 159);
 
@@ -148,11 +153,46 @@ public class Main {
         JPanel mainSection = new JPanel();
         mainSection.setBounds(233, 200, 820, 400);
         mainSection.setBackground(new Color(26, 145, 85));
-        
+        // Button frame
+        JPanel buttonFrame = new JPanel();
+        buttonFrame.setLayout(new FlowLayout(FlowLayout.LEADING, 50, 0));
+        buttonFrame.setBounds(476, 200, 1000, 170);
+        buttonFrame.setBackground(new Color(26, 145, 85));
+
+        JButton bet = new JButton("BET");
+        bet.setFont(nameFont);
+        bet.setEnabled(true);
+        bet.addActionListener(new Bet());
+
+        buttonFrame.add(bet);
+        myFrame.add(buttonFrame);
 
         myFrame.add(mainSection);
 
         myFrame.setVisible(true);
         
     }
+    private static class Bet implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+            draw_random random = new draw_random();
+            random.getRandomCards();
+            String card1 = random.card_1[0]; // get the first card
+            String card2 = random.card_1[1]; // get the second card
+    
+            String imagePath1 = "A_Card_Game/Card Image/" + card1 + ".png";
+            String imagePath2 = "A_Card_Game/Card Image/" + card2 + ".png";
+            System.out.println(imagePath1);
+            System.out.println(imagePath2);
+
+            ImageIcon new_card1 = new ImageIcon(imagePath1);
+            ImageIcon new_card2 = new ImageIcon(imagePath2);
+            p1_first_card.setIcon(new_card1);
+            p1_first_card.setBounds(476, 600, 119, 159);
+            p1_second_card.setIcon(new_card2);
+            p1_second_card.setBounds(476, 30, 119, 159);            
+			
+		}
+		
+	}
 }
