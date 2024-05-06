@@ -1,3 +1,4 @@
+package A_Card_Game;
 /*
     Description: handle all UI extends JFrame
 */
@@ -33,7 +34,7 @@ class MyButton extends JButton{
         //add new font
         try {
             //create the font to use. Specify the size!
-            customFont = Font.createFont(Font.TRUETYPE_FONT, new File("FONT/horizon.otf")).deriveFont(30f);
+            customFont = Font.createFont(Font.TRUETYPE_FONT, new File("A_Card_Game/Fonts/horizon.otf")).deriveFont(30f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             //register the font
             ge.registerFont(customFont);
@@ -63,7 +64,7 @@ public class UI extends JFrame{
         this.setLayout(null);
         this.getContentPane().setBackground(Color.white);
 
-        ImageIcon icon_image = new ImageIcon("IMAGE/icon.png"); // create an imageicon
+        ImageIcon icon_image = new ImageIcon("A_Card_Game/IMAGE/icon.png"); // create an imageicon
         this.setIconImage(icon_image.getImage()); // change the default icon into new icon
         
         createMenu();
