@@ -19,7 +19,7 @@ public class PaintPanel extends JPanel implements ActionListener {
         
         //add image to the frame
         try {
-            bg_img = ImageIO.read(getClass().getClassLoader().getResource("A_Card_Game/IMAGE/" + image_name));
+            bg_img = ImageIO.read(getClass().getClassLoader().getResource("IMAGE/" + image_name));
         } catch (IOException e){
             e.getMessage();
         }
