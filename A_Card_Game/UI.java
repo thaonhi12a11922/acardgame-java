@@ -3,6 +3,7 @@ package A_Card_Game;
     Description: handle all UI extends JFrame
 */
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
@@ -13,6 +14,7 @@ import java.io.IOException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 class MyButton extends JButton{
     String text;
@@ -50,7 +52,7 @@ class MyButton extends JButton{
 public class UI extends JFrame{
     //Menu screen
     JButton startButton, ruleButton, backRuleButton, backGuideButton, guideButton;
-    PaintPanel menu_canvas, rule_canvas, guide_canvas;
+    PaintPanel menu_canvas, rule_canvas, guide_canvas, stage_canvas;
     
     Game game;
     
@@ -70,6 +72,7 @@ public class UI extends JFrame{
         createMenu();
         createRule();
         createGuide();
+        createPlayPage();
         
         this.setVisible(true);
 
@@ -119,6 +122,13 @@ public class UI extends JFrame{
         backGuideButton = new MyButton("BACK", 70, 34*2 - 8);
         backGuideButton.addActionListener(game.aHandler);
         this.add(backGuideButton);
+    }
+
+    private void createPlayPage(){
+        menu_canvas = new PaintPanel(this, "menu.png");
+        menu_canvas.setBounds(0,0,1280,800);
+        menu_canvas.setOpaque(false);
+        this.add(menu_canvas);
     }
 
 }

@@ -8,6 +8,10 @@ public class Game {
     UI ui = new UI(this);
 
     //change in frontend of menu, rule, guide, and game play
+    private void statusGame(boolean status){
+        
+    }
+
     private void statusMenu(boolean status){
         ui.menu_canvas.setVisible(status);
         ui.guideButton.setVisible(status);
@@ -42,11 +46,10 @@ public class Game {
     }
     
     public void menuToGame(){
-        // frame bên game hay gì đó
+        statusGame(true); //turn on game screen
         statusGuide(false); //turn off guide screen
         statusRule(false); //turn off rule screen
-        statusMenu(false); //turn on menu screen
-
+        statusMenu(false); //turn off menu screen
         
     }
 }

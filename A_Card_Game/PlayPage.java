@@ -3,11 +3,14 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.io.File;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -92,10 +95,10 @@ public class PlayPage {
 
         myFrame.add(player2);
 
-        //Play 1 - you
+        // Play 1 - you
         JPanel player1 = new JPanel();
         player1.setLayout(new FlowLayout(FlowLayout.LEADING, 50, 0));
-        player1.setBounds(476, 600, 1000, 170);
+        player1.setBounds(476, 620, 1000, 170);
         player1.setBackground(new Color(26, 145, 85));
 
         // JLabel p1_first_card = new JLabel();
@@ -131,24 +134,12 @@ public class PlayPage {
         player1.add(p1_info);
 
         myFrame.add(player1);
-
-        ImageIcon border = new ImageIcon("A_Card_Game/Img/rounded_edge_rect.png");
-        JLabel border_graphic = new JLabel();
-        border_graphic.setIcon(border);
-
-        JLabel pot = new JLabel();
-        pot.setText("POT $250");
-        pot.setHorizontalAlignment(JLabel.CENTER);
-        pot.setVerticalAlignment(JLabel.CENTER);
-
-        JPanel mainSection = new JPanel();
-        mainSection.setBounds(233, 200, 820, 400);
-        mainSection.setBackground(new Color(26, 145, 85));
+        
         // Button frame
         JPanel buttonFrame = new JPanel();
         buttonFrame.setLayout(new FlowLayout(FlowLayout.LEADING, 50, 0));
-        buttonFrame.setBounds(476, 200, 1000, 170);
-        buttonFrame.setBackground(new Color(26, 145, 85));
+        buttonFrame.setBounds(496, 530, 200, 170);
+        buttonFrame.setBackground(new Color(0, 0, 0, 0));
 
         JButton bet = new JButton("BET");
         bet.setFont(nameFont);
@@ -158,11 +149,52 @@ public class PlayPage {
         buttonFrame.add(bet);
         myFrame.add(buttonFrame);
 
-        myFrame.add(mainSection);
+        //The rectangle in the middle of the screen
+
+        JPanel centralPanel = new JPanel();
+        centralPanel.setLayout(new BorderLayout());
+        centralPanel.setBounds(232, 220, 820, 378);
+        centralPanel.setBackground(new Color(0, 0, 0, 0));
+
+        JLabel centralIMG = new JLabel();
+        centralIMG.setIcon(new ImageIcon("A_Card_Game/Img/rounded_edge_rect.png"));
+
+        centralPanel.add(centralIMG);
+
+        centralPanel.setVisible(true);
+
+        myFrame.add(centralPanel);
+
+        //five cards
+        JPanel fiveCards = new JPanel();
+        fiveCards.setLayout(new FlowLayout(FlowLayout.LEADING, 25, 0));
+        fiveCards.setBounds(276, 329, 1003, 159);
+        fiveCards.setBackground(new Color(26, 145, 85));
+
+        JLabel first_card = new JLabel();
+        first_card.setIcon(red_card);
+        JLabel second_card = new JLabel();
+        second_card.setIcon(red_card);
+        JLabel third_card = new JLabel();
+        third_card.setIcon(red_card);
+        JLabel fourth_card = new JLabel();
+        fourth_card.setIcon(red_card);
+        JLabel fifth_card = new JLabel();
+        fifth_card.setIcon(red_card);
+
+        fiveCards.add(first_card);
+        fiveCards.add(second_card);
+        fiveCards.add(third_card);
+        fiveCards.add(fourth_card);
+        fiveCards.add(fifth_card);
+
+        myFrame.add(fiveCards);
+
 
         myFrame.setVisible(true);
         
     }
+
     private static class Bet implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
