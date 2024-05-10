@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.io.File;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -19,14 +18,23 @@ import A_Card_Game.Function.draw_random;
 public class PlayPage {
     static JLabel p1_first_card = new JLabel();
     static JLabel p1_second_card = new JLabel();
+
+    static JLabel p2_first_card = new JLabel();
+    static JLabel p2_second_card = new JLabel();
+
     static JLabel first_card = new JLabel();
     static JLabel second_card = new JLabel();
     static JLabel third_card = new JLabel();
     static JLabel fourth_card = new JLabel();
     static JLabel fifth_card = new JLabel();
 
-
+    // call random funtion
+    static draw_random randomFunction = new draw_random();
+    
     public static void startGame() throws Exception {
+        // define random function
+        randomFunction.getRandomCards();
+
         MyFrame myFrame = new MyFrame();
         myFrame.getContentPane().setBackground(new Color(26, 145, 85));
 
@@ -74,6 +82,11 @@ public class PlayPage {
         player2.add(p2_first_card);
         player2.add(p2_second_card);
 
+        // Get the name of two cards of Player 2
+        String player2_card1 = randomFunction.card_2[0]; 
+        String player2_card2 = randomFunction.card_2[1]; 
+
+
         JLabel p2_name = new JLabel("Player 2", JLabel.CENTER);
         p2_name.setForeground(Color.WHITE);
 
@@ -93,13 +106,19 @@ public class PlayPage {
         return player2;
     }
     private static JPanel createPlayer1Panel() throws Exception {
-        ImageIcon white_card = new ImageIcon("A_Card_Game/Img/white_card.png");
+        // ImageIcon white_card = new ImageIcon("A_Card_Game/Img/white_card.png");
         JPanel player1 = new JPanel(new FlowLayout(FlowLayout.LEADING, 50, 0));
         player1.setBounds(476, 600, 1000, 170);
         player1.setBackground(new Color(26, 145, 85));
+                
+        // Get the first two cards of You - Player 1
+        String player1_card1 = randomFunction.card_1[0]; 
+        String player1_card2 = randomFunction.card_1[1]; 
+        p1_first_card.setIcon(new ImageIcon("A_Card_Game/Card Image/" + player1_card1 + ".png"));
+        p1_second_card.setIcon(new ImageIcon("A_Card_Game/Card Image/" + player1_card2 + ".png"));
 
-        p1_first_card.setIcon(white_card);
-        p1_second_card.setIcon(white_card);
+        // p1_first_card.setIcon(white_card);
+        // p1_second_card.setIcon(white_card);
 
         player1.add(p1_first_card);
         player1.add(p1_second_card);
@@ -156,9 +175,8 @@ public class PlayPage {
         final int[] clickCount = {0};
         bet.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                draw_random random = new draw_random();
-                random.getRandomCards();
-                String[] middle_cards = random.middle_list;
+
+                String[] middle_cards = randomFunction.middle_list;
         
                 // Check if the click count is less than the number of cards
                 if (clickCount[0] < middle_cards.length) {
