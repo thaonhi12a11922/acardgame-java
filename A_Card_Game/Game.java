@@ -32,7 +32,6 @@ public class Game {
     }
     
     public void menuToRule(){
-        ui.menu_canvas.setVisible(false);
         statusMenu(false); //turn off menu screen
         statusRule(true); //turn on rule screen
     }
@@ -45,7 +44,6 @@ public class Game {
     public void backtoMenu(){
         statusGuide(false); //turn off guide screen
         statusRule(false); //turn off rule screen
-        ui.menu_canvas.setVisible(true);
         statusMenu(true); //turn on menu screen
     }
     
