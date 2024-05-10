@@ -6,7 +6,7 @@ class MyFrame extends JFrame{
     MyFrame(){
         new JFrame();
 
-        this.setTitle("A Card Game");
+        this.setTitle("Poker Hand");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(1280, 832);
         this.setVisible(true);
