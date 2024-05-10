@@ -52,8 +52,10 @@ public class Game {
     }
     
     public void menuToGame() throws Exception{
-        ui.dispose(); //turn off menu screen
-        PlayPage.startGame(); //turn on game screen
+        statusMenu(false);
+        statusGame(true);
+        // ui.dispose(); //turn off menu screen
+        // PlayPage.startGame(); //turn on game screen
     }
 
 }
