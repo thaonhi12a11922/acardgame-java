@@ -28,6 +28,7 @@ class MyButton extends JButton{
         this.setFocusPainted(false);
         this.setForeground(Color.black);
         this.setVisible(false);
+        this.setOpaque(true);
         
         this.setActionCommand(text);
 
@@ -56,6 +57,7 @@ public class UI extends JFrame{
     
     public UI(Game game){
         this.game = game;
+
         this.setTitle("Poker hand");
         this.setSize(1280,800);
         this.setLocationRelativeTo(null);
@@ -70,17 +72,14 @@ public class UI extends JFrame{
         createMenu();
         createRule();
         createGuide();
-        createPlayPage();
         
         this.setVisible(true);
-
     }
 
     private void createMenu() {
         menu_canvas = new PaintPanel(this, "menu.png");
         menu_canvas.setBounds(0,0,1280,800);
         menu_canvas.setOpaque(true); // allow orride the background image
-        this.add(menu_canvas);
 
         startButton = new MyButton("START", 520, 450);
         startButton.addActionListener(game.aHandler);
@@ -98,35 +97,28 @@ public class UI extends JFrame{
         this.add(startButton);
         this.add(ruleButton);
         this.add(guideButton);
+        this.add(menu_canvas);
     }
 
     private void createRule(){
         rule_canvas = new PaintPanel(this, "rule.png");
         rule_canvas.setBounds(0,0,1280,800);
         rule_canvas.setOpaque(true); // allow orride the background image
-        this.add(rule_canvas);
         
         backRuleButton = new MyButton("BACK", 70, 34*2 - 8);
         backRuleButton.addActionListener(game.aHandler);
         this.add(backRuleButton);
+        this.add(rule_canvas);
     }
 
     private void createGuide(){
         guide_canvas = new PaintPanel(this, "guide.png");
         guide_canvas.setBounds(0,0,1280,800);
         guide_canvas.setOpaque(true); // allow orride the background image
-        this.add(guide_canvas);
 
         backGuideButton = new MyButton("BACK", 70, 34*2 - 8);
         backGuideButton.addActionListener(game.aHandler);
         this.add(backGuideButton);
+        this.add(guide_canvas);
     }
-
-    private void createPlayPage(){
-        // menu_canvas = new PaintPanel(this, "menu.png");
-        // menu_canvas.setBounds(0,0,1280,800);
-        // menu_canvas.setOpaque(false);
-        // this.add(menu_canvas);
-    }
-
 }

@@ -36,6 +36,7 @@ public class PlayPage {
         randomFunction.getRandomCards();
 
         MyFrame myFrame = new MyFrame();
+        
         myFrame.getContentPane().setBackground(new Color(26, 145, 85));
 
         JPanel round = createRoundPanel();

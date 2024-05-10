@@ -16,7 +16,11 @@ public class ActionHandler implements ActionListener {
 
         switch (command) {
             case "START":
-                game.menuToGame();
+                try {
+                    game.menuToGame();
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                }
                 break;
             case "RULE":
                 game.menuToRule();
