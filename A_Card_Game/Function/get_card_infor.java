@@ -1,4 +1,5 @@
 package A_Card_Game.Function;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -66,6 +67,7 @@ public class get_card_infor {
             best_card.setHand(best_cards);
             current_card_info.setHand(current_card);
             int result = best_card.compare_to(current_card_info);
+
             if (result == 1) {
                 best_cards[0] = current_card[0];
                 best_cards[1] = current_card[1];
