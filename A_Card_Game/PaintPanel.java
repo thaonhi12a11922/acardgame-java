@@ -16,12 +16,15 @@ public class PaintPanel extends JPanel implements ActionListener {
 
     public PaintPanel(UI ui, String image_name){
         this.ui = ui;
+        // String file_path = "A_Card_Game/IMAGE/" + image_name;
+        // System.out.println(file_path);
         
         //add image to the frame
         try {
-            bg_img = ImageIO.read(getClass().getClassLoader().getResource("A_Card_Game\\IMAGE\\" + image_name));
-
-        } catch (IOException e){
+            bg_img = ImageIO.read(getClass().getClassLoader().getResource("A_Card_Game/IMAGE/" + image_name));
+        } 
+        catch (IOException e){
+            // throw new IllegalArgumentException(file_path);
             e.getMessage();
         }
 

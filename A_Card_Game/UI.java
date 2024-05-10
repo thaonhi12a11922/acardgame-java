@@ -34,7 +34,7 @@ class MyButton extends JButton{
         //add new font
         try {
             //create the font to use. Specify the size!
-            customFont = Font.createFont(Font.TRUETYPE_FONT, new File("Fonts/horizon.otf")).deriveFont(30f);
+            customFont = Font.createFont(Font.TRUETYPE_FONT, new File("A_Card_Game/Fonts/horizon.otf")).deriveFont(30f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             //register the font
             ge.registerFont(customFont);
@@ -79,7 +79,7 @@ public class UI extends JFrame{
     private void createMenu() {
         menu_canvas = new PaintPanel(this, "menu.png");
         menu_canvas.setBounds(0,0,1280,800);
-        menu_canvas.setOpaque(false);
+        menu_canvas.setOpaque(true); // allow orride the background image
         this.add(menu_canvas);
 
         startButton = new MyButton("START", 520, 450);
@@ -103,7 +103,7 @@ public class UI extends JFrame{
     private void createRule(){
         rule_canvas = new PaintPanel(this, "rule.png");
         rule_canvas.setBounds(0,0,1280,800);
-        rule_canvas.setOpaque(false);
+        rule_canvas.setOpaque(true); // allow orride the background image
         this.add(rule_canvas);
         
         backRuleButton = new MyButton("BACK", 70, 34*2 - 8);
@@ -114,7 +114,7 @@ public class UI extends JFrame{
     private void createGuide(){
         guide_canvas = new PaintPanel(this, "guide.png");
         guide_canvas.setBounds(0,0,1280,800);
-        guide_canvas.setOpaque(false);
+        guide_canvas.setOpaque(true); // allow orride the background image
         this.add(guide_canvas);
 
         backGuideButton = new MyButton("BACK", 70, 34*2 - 8);
@@ -123,10 +123,10 @@ public class UI extends JFrame{
     }
 
     private void createPlayPage(){
-        menu_canvas = new PaintPanel(this, "menu.png");
-        menu_canvas.setBounds(0,0,1280,800);
-        menu_canvas.setOpaque(false);
-        this.add(menu_canvas);
+        // menu_canvas = new PaintPanel(this, "menu.png");
+        // menu_canvas.setBounds(0,0,1280,800);
+        // menu_canvas.setOpaque(false);
+        // this.add(menu_canvas);
     }
 
 }
