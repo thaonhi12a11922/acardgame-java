@@ -11,7 +11,11 @@ public class Game {
 
     //change in frontend of menu, rule, guide, and game play
     private void statusGame(boolean status){
-        
+        try {
+            PlayPage.startGame();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void statusMenu(boolean status){

@@ -28,18 +28,14 @@ class MyButton extends JButton {
         this.setFocusPainted(false);
         this.setForeground(Color.black);
         this.setVisible(false);
+        this.setOpaque(true);
 
         this.setActionCommand(text);
 
         // add new font
         try {
-<<<<<<< HEAD
             //create the font to use. Specify the size!
             customFont = Font.createFont(Font.TRUETYPE_FONT, new File("A_Card_Game/Fonts/horizon.otf")).deriveFont(30f);
-=======
-            // create the font to use. Specify the size!
-            customFont = Font.createFont(Font.TRUETYPE_FONT, new File("Fonts/horizon.otf")).deriveFont(30f);
->>>>>>> 339ce78 (add announcement)
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             // register the font
             ge.registerFont(customFont);
@@ -75,7 +71,6 @@ public class UI extends JFrame {
         createMenu();
         createRule();
         createGuide();
-        createPlayPage();
 
         this.setVisible(true);
 
@@ -83,14 +78,9 @@ public class UI extends JFrame {
 
     private void createMenu() {
         menu_canvas = new PaintPanel(this, "menu.png");
-<<<<<<< HEAD
         menu_canvas.setBounds(0,0,1280,800);
-        menu_canvas.setOpaque(true); // allow orride the background image
-=======
-        menu_canvas.setBounds(0, 0, 1280, 800);
-        menu_canvas.setOpaque(false);
->>>>>>> 339ce78 (add announcement)
-        this.add(menu_canvas);
+        menu_canvas.setOpaque(false); // allow orride the background image
+        
 
         startButton = new MyButton("START", 520, 450);
         startButton.addActionListener(game.aHandler);
@@ -108,53 +98,32 @@ public class UI extends JFrame {
         this.add(startButton);
         this.add(ruleButton);
         this.add(guideButton);
+        this.add(menu_canvas);
     }
 
     private void createRule() {
         rule_canvas = new PaintPanel(this, "rule.png");
-<<<<<<< HEAD
         rule_canvas.setBounds(0,0,1280,800);
-        rule_canvas.setOpaque(true); // allow orride the background image
-=======
-        rule_canvas.setBounds(0, 0, 1280, 800);
-        rule_canvas.setOpaque(false);
->>>>>>> 339ce78 (add announcement)
-        this.add(rule_canvas);
+        rule_canvas.setOpaque(false); // allow orride the background image
 
         backRuleButton = new MyButton("BACK", 70, 34 * 2 - 8);
+        backRuleButton.setForeground(Color.WHITE);
         backRuleButton.addActionListener(game.aHandler);
         this.add(backRuleButton);
+        this.add(rule_canvas);
     }
 
     private void createGuide() {
         guide_canvas = new PaintPanel(this, "guide.png");
-<<<<<<< HEAD
         guide_canvas.setBounds(0,0,1280,800);
         guide_canvas.setOpaque(true); // allow orride the background image
-=======
-        guide_canvas.setBounds(0, 0, 1280, 800);
-        guide_canvas.setOpaque(false);
->>>>>>> 339ce78 (add announcement)
-        this.add(guide_canvas);
+        
 
         backGuideButton = new MyButton("BACK", 70, 34 * 2 - 8);
+        backRuleButton.setForeground(Color.WHITE);
         backGuideButton.addActionListener(game.aHandler);
         this.add(backGuideButton);
-    }
-
-<<<<<<< HEAD
-    private void createPlayPage(){
-        // menu_canvas = new PaintPanel(this, "menu.png");
-        // menu_canvas.setBounds(0,0,1280,800);
-        // menu_canvas.setOpaque(false);
-        // this.add(menu_canvas);
-=======
-    private void createPlayPage() {
-        menu_canvas = new PaintPanel(this, "menu.png");
-        menu_canvas.setBounds(0, 0, 1280, 800);
-        menu_canvas.setOpaque(false);
-        this.add(menu_canvas);
->>>>>>> 339ce78 (add announcement)
+        this.add(guide_canvas);
     }
 
 }
