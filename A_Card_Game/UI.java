@@ -3,7 +3,6 @@ package A_Card_Game;
     Description: handle all UI extends JFrame
 */
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
@@ -14,7 +13,6 @@ import java.io.IOException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 class MyButton extends JButton{
     String text;

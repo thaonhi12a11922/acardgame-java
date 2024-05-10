@@ -7,6 +7,8 @@ public class Game {
     ActionHandler aHandler = new ActionHandler(this);
     UI ui = new UI(this);
 
+    public Game(){}
+
     //change in frontend of menu, rule, guide, and game play
     private void statusGame(boolean status){
         
@@ -52,4 +54,5 @@ public class Game {
         statusMenu(false); //turn off menu screen
         
     }
+
 }
