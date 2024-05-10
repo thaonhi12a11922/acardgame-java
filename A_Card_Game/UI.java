@@ -29,7 +29,7 @@ class MyButton extends JButton {
         this.setForeground(Color.black);
         this.setVisible(false);
         this.setOpaque(true);
-
+        
         this.setActionCommand(text);
 
         // add new font
@@ -57,6 +57,7 @@ public class UI extends JFrame {
 
     public UI(Game game) {
         this.game = game;
+
         this.setTitle("Poker hand");
         this.setSize(1280, 800);
         this.setLocationRelativeTo(null);
@@ -71,9 +72,8 @@ public class UI extends JFrame {
         createMenu();
         createRule();
         createGuide();
-
+        
         this.setVisible(true);
-
     }
 
     private void createMenu() {
@@ -125,5 +125,4 @@ public class UI extends JFrame {
         this.add(backGuideButton);
         this.add(guide_canvas);
     }
-
 }

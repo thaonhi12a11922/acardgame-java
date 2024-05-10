@@ -51,11 +51,9 @@ public class Game {
         statusMenu(true); //turn on menu screen
     }
     
-    public void menuToGame(){
-        statusGuide(false); //turn off guide screen
-        statusRule(false); //turn off rule screen
-        statusMenu(false); //turn off menu screen
-        statusGame(true); //turn on game screen
+    public void menuToGame() throws Exception{
+        ui.dispose(); //turn off menu screen
+        PlayPage.startGame(); //turn on game screen
     }
 
 }

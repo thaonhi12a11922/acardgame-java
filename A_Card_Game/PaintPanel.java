@@ -1,4 +1,5 @@
 package A_Card_Game;
+
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,7 +12,6 @@ import javax.swing.JPanel;
 public class PaintPanel extends JPanel implements ActionListener {
     UI ui;
     BufferedImage bg_img;
-    float alphaValue = 0f;
     String image_name;
 
     public PaintPanel(UI ui, String image_name){
@@ -24,7 +24,6 @@ public class PaintPanel extends JPanel implements ActionListener {
             // throw new IllegalArgumentException(file_path);
             e.getMessage();
         }
-
     }
 
     public void paintComponent(Graphics g){
@@ -35,7 +34,6 @@ public class PaintPanel extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         repaint();
-
     }
     
 }
