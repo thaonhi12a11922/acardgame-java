@@ -10,13 +10,6 @@ public class Game {
     public Game(){}
 
     //change in frontend of menu, rule, guide, and game play
-    private void statusGame(boolean status){
-        try {
-            PlayPage.startGame();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     private void statusMenu(boolean status){
         ui.menu_canvas.setVisible(status);
@@ -53,7 +46,12 @@ public class Game {
     
     public void menuToGame() throws Exception{
         ui.dispose(); //turn off menu screen
-        PlayPage.startGame(); //turn on game screen
+        
+        try {
+            PlayPage.startGame(); //turn on game screen
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

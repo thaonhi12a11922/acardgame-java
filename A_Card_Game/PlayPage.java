@@ -66,6 +66,9 @@ public class PlayPage {
 
         JPanel player2 = createPlayer2Panel();
         myFrame.add(player2);
+        
+        JPanel middleFrame = createMiddleFrame();
+        myFrame.add(middleFrame);
 
         JPanel player1 = createPlayer1Panel();
         myFrame.add(player1);
@@ -76,24 +79,22 @@ public class PlayPage {
         JPanel buttonFrame = createButtonFrame();
         myFrame.add(buttonFrame);
 
-        // JPanel middleFrame = createMiddleFrame();
-        // myFrame.add(middleFrame);
+
 
         myFrame.setVisible(true);
     }
 
     private static JPanel createRoundPanel() throws Exception {
         round = new JPanel(new BorderLayout());
-        // round.setBackground(new Color(1, 2, 2, 200));
         round.setBackground(null);
 
         roundText = new JLabel("Round  1", JLabel.LEFT);
-        roundText.setForeground(new Color(1, 2, 2));
+        roundText.setForeground(Color.WHITE);
 
         //add new font
         try {
             //create the font to use. Specify the size!
-            customFont = Font.createFont(Font.TRUETYPE_FONT, new File("A_Card_Game/Fonts/horizon.otf")).deriveFont(42f);
+            customFont = Font.createFont(Font.TRUETYPE_FONT, new File("A_Card_Game/Fonts/Moul-Regular.ttf")).deriveFont(42f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             //register the font
             ge.registerFont(customFont);
@@ -114,15 +115,13 @@ public class PlayPage {
         JPanel player2 = new JPanel(new FlowLayout(FlowLayout.LEADING, 50, 0));
         player2.setBounds(450, 30, 1000, 170);
         player2.setBackground(new Color(26, 145, 85));
+        
+        p2_first_card.setIcon(red_card);
+        p2_second_card.setIcon(red_card);
 
-        JLabel p2_first_card = new JLabel(red_card);
-        JLabel p2_second_card = new JLabel(red_card);
         player2.add(p2_first_card);
         player2.add(p2_second_card);
 
-        // Get the name of two cards of Player 2
-        String player2_card1 = randomFunction.card_2[0]; 
-        String player2_card2 = randomFunction.card_2[1]; 
 
         JLabel p2_name = new JLabel("Player 2", JLabel.CENTER);
         p2_name.setForeground(Color.WHITE);
@@ -144,9 +143,8 @@ public class PlayPage {
     }
 
     private static JPanel createPlayer1Panel() throws Exception {
-        // ImageIcon white_card = new ImageIcon("A_Card_Game/Img/white_card.png");
         JPanel player1 = new JPanel(new FlowLayout(FlowLayout.LEADING, 50, 0));
-        player1.setBounds(450, 570, 1000, 170);
+        player1.setBounds(450, 590, 1000, 170);
         player1.setBackground(new Color(26, 145, 85));
                 
         // Get the first two cards of You - Player 1
@@ -156,8 +154,6 @@ public class PlayPage {
         p1_first_card.setIcon(add_image(player1_card1));
         p1_second_card.setIcon(add_image(player1_card2));
 
-        // p1_first_card.setIcon(white_card);
-        // p1_second_card.setIcon(white_card);
 
         player1.add(p1_first_card);
         player1.add(p1_second_card);
@@ -185,7 +181,7 @@ public class PlayPage {
         ImageIcon red_card = new ImageIcon("A_Card_Game/Img/red_card.png");
         JPanel fiveCards = new JPanel();
         fiveCards.setLayout(new FlowLayout(FlowLayout.LEADING, 25, 0));
-        fiveCards.setBounds(260, 300, 1003, 159);
+        fiveCards.setBounds(260, 280, 750, 159);
         fiveCards.setBackground(new Color(26, 145, 85));
 
         first_card.setIcon(red_card);
@@ -204,23 +200,39 @@ public class PlayPage {
     }
     
     private static JPanel createButtonFrame() throws Exception {
-        JPanel buttonFrame = new JPanel(new FlowLayout(FlowLayout.LEADING, 50, 0));
-        buttonFrame.setBounds(478, 500, 200, 170);
+        JPanel buttonFrame = new JPanel(new FlowLayout(FlowLayout.LEADING, 55, 0));
+        buttonFrame.setBounds(460, 480, 500, 100);
         buttonFrame.setBackground(new Color(26, 145, 85));
-
+        
+        // Add BET button
         JButton bet = new JButton("BET");
-        bet.setFont(new Font("Tahoma", Font.BOLD, 20));
+        bet.setFont(new Font("Tahoma", Font.BOLD, 30));
         bet.setBorder(null);
-        bet.setBackground(new Color(0xDBDBDB));
-        bet.setPreferredSize(new Dimension(60,40));
-        bet.setForeground(new Color(159,0,0));
+        bet.setBackground(new Color(159, 0, 0));
+        bet.setPreferredSize(new Dimension(100,50));
+        bet.setForeground(Color.WHITE);
         bet.setFocusPainted(false);
         bet.setEnabled(true);
+        bet.setOpaque(true);
+        
+        // Add FOLD button
+        JButton fold = new JButton("FOLD");
+        fold.setFont(new Font("Tahoma", Font.BOLD, 30));
+        fold.setBorder(null);
+        fold.setBackground(new Color(159, 0, 0));
+        fold.setPreferredSize(new Dimension(100,50));
+        fold.setForeground(Color.WHITE);
+        fold.setFocusPainted(false);
+        fold.setEnabled(true);
+        fold.setOpaque(true);
 
         // Initialize a counter for the number of clicks
         final int[] clickCount = {0};
         bet.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                // Get the cards of Computer
+                String[] cards_2 = randomFunction.card_2;
+                // Get the middle list
                 String[] middle_cards = randomFunction.middle_list;
         
                 // take best combination between middle card and first card
@@ -263,7 +275,17 @@ public class PlayPage {
                         case 2:
                             fifth_card.setIcon(add_image(middle_cards[4]));
                             roundText.setText("Round  4");
-                            bet.setEnabled(false); //unenable to click the button
+                            bet.setVisible(false);
+                            fold.setVisible(false);
+                            
+                            // Show up two cards of Computer
+                            Timer timerCard = new Timer(2000, event -> {
+                                p2_first_card.setIcon(add_image(cards_2[0]));
+                                p2_second_card.setIcon(add_image(cards_2[1]));
+                            });
+
+                            timerCard.setRepeats(false); // Ensure the timer only runs once
+                            timerCard.start(); // Start the timer
 
                             Timer timer = new Timer(5000, event -> {
                                 // Code to execute after 20 seconds
@@ -297,17 +319,26 @@ public class PlayPage {
         });
 
         buttonFrame.add(bet);
+        buttonFrame.add(fold);
         return buttonFrame;
     }
 
     private static JPanel createMiddleFrame() throws Exception {
         JPanel centralPanel = new JPanel();
         centralPanel.setLayout(new BorderLayout());
-        centralPanel.setBounds(232, 220, 820, 378);
+        centralPanel.setBounds(232, 200, 820, 378);
         centralPanel.setBackground(new Color(0, 0, 0, 0));
+        centralPanel.setOpaque(false);
 
+        // scale down the image
+        ImageIcon originalIcon = new ImageIcon("A_Card_Game/Img/rounded_edge_rect.png");
+        Image originalImage = originalIcon.getImage();
+        Image scaledImage = originalImage.getScaledInstance(820, 350, Image.SCALE_DEFAULT);
+        ImageIcon scaledIcon = new ImageIcon(scaledImage);
+    
         JLabel centralIMG = new JLabel();
-        centralIMG.setIcon(new ImageIcon("A_Card_Game/Img/rounded_edge_rect.png"));
+        centralIMG.setIcon(scaledIcon);
+
 
         centralPanel.add(centralIMG);
 
@@ -315,5 +346,6 @@ public class PlayPage {
 
         return centralPanel;
     }
+
 }
 
