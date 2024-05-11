@@ -1,4 +1,5 @@
 package A_Card_Game;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
@@ -8,7 +9,8 @@ import java.awt.event.ActionListener;
 public class YouLose extends JFrame {
     static Font customFont;
     static MyFrame myFrame = new MyFrame();
-    public static void displayResult() throws Exception{
+
+    public static void displayResult() throws Exception {
 
         myFrame.getContentPane().setBackground(new Color(26, 145, 85));
         // add Gameover frame
@@ -19,11 +21,12 @@ public class YouLose extends JFrame {
         myFrame.add(buttonFrame);
         myFrame.setVisible(true);
 
-
     }
+
     private static JPanel createText() throws Exception {
         try {
-            customFont = Font.createFont(Font.TRUETYPE_FONT, new File("A_Card_Game/Fonts/Moul-Regular.ttf")).deriveFont(80f);
+            customFont = Font.createFont(Font.TRUETYPE_FONT, new File("A_Card_Game/Fonts/Moul-Regular.ttf"))
+                    .deriveFont(80f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(customFont);
         } catch (Exception e) {
@@ -32,7 +35,7 @@ public class YouLose extends JFrame {
         JPanel textFrame = new JPanel(new FlowLayout(FlowLayout.CENTER, 50, 0));
         textFrame.setBounds(300, 280, 750, 159);
         textFrame.setBackground(new Color(26, 145, 85));
-                
+
         JLabel gameOverLabel = new JLabel("GAME OVER", JLabel.CENTER);
         gameOverLabel.setFont(customFont);
         gameOverLabel.setForeground(new Color(158, 39, 39));
@@ -48,6 +51,7 @@ public class YouLose extends JFrame {
         textFrame.add(gameOverLabel);
         return textFrame;
     }
+
     private static JPanel createButtonFrame() throws Exception {
         JPanel buttonFrame = new JPanel();
         buttonFrame.setLayout(new BoxLayout(buttonFrame, BoxLayout.PAGE_AXIS));
@@ -76,7 +80,7 @@ public class YouLose extends JFrame {
         exitButton.setFont(new Font("Tahoma", Font.BOLD, 30));
         exitButton.setBorder(null);
         exitButton.setBackground(new Color(159, 0, 0));
-        exitButton.setPreferredSize(new Dimension(100,70));
+        exitButton.setPreferredSize(new Dimension(100, 70));
         exitButton.setMaximumSize(playAgain.getPreferredSize()); // Set maximum size
         exitButton.setForeground(Color.WHITE);
         exitButton.setFocusPainted(false);
@@ -89,7 +93,7 @@ public class YouLose extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 myFrame.dispose(); // Close the current frame
                 try {
-                    new Game();  
+                    new Game();
                 } catch (Exception e1) {
                     e1.printStackTrace();
                 }
@@ -103,12 +107,11 @@ public class YouLose extends JFrame {
             }
         });
 
-        
         buttonFrame.add(exitButton);
         return buttonFrame;
-    } 
-    // C Ha run thu cai nay de xem frame cung dc ne
-    // public static void main(String[] args) throws Exception{
-    //     displayResult();
-    // }
+    }
+
+    public static void main(String[] args) throws Exception {
+        displayResult();
+    }
 }

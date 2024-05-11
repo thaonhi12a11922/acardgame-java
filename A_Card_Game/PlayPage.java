@@ -23,6 +23,7 @@ import javax.swing.Timer;
 
 import A_Card_Game.Function.draw_random;
 import A_Card_Game.Function.get_card_infor;
+import A_Card_Game.YouLose;
 // import button and win screen
 import A_Card_Game.UI;
 
@@ -323,6 +324,11 @@ public class PlayPage {
                             // Frame of the result
 
                             Timer timer2 = new Timer(5000, event -> {
+                                try {
+                                    YouLose.displayResult();
+                                } catch (Exception e1) {
+                                    e1.printStackTrace();
+                                }
 
                             });
 
