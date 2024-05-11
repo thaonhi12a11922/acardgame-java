@@ -300,8 +300,8 @@ public class PlayPage {
                                 first_card.setVisible(false);
 
                                 JTextArea resultTextArea = new JTextArea();
-                                resultTextArea.setEditable(false); // Đảm bảo không thể chỉnh sửa nội dung
-                                resultTextArea.setLineWrap(true); // Tự động xuống dòng khi cần
+                                resultTextArea.setEditable(false);
+                                resultTextArea.setLineWrap(true);
 
                                 JScrollPane scrollPane = new JScrollPane(resultTextArea);
 
