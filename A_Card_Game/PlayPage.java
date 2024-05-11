@@ -342,5 +342,4 @@ public class PlayPage {
 
         return centralPanel;
     }
-
 }
