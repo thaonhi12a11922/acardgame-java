@@ -313,8 +313,6 @@ public class PlayPage {
                                 resultTextArea.setText(resultText);
                                 buttonFrame.add(scrollPane);
                                 buttonFrame.setLocation(null);
-                                // Thiết lập hoạt động mặc định khi đóng cửa sổ
-                                // Hiển thị JFrame
                                 resultTextArea.setVisible(true);
 
                             });
