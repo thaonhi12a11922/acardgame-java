@@ -6,7 +6,7 @@ package A_Card_Game;
 public class Game {
     ActionHandler aHandler = new ActionHandler(this);
     UI ui = new UI(this);
-
+    
     public Game(){}
 
     //change in frontend of menu, rule, guide, and game play

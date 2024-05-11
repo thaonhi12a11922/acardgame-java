@@ -4,53 +4,12 @@ package A_Card_Game;
 */
 
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontFormatException;
-import java.io.File;
-import java.awt.GraphicsEnvironment;
-import java.io.IOException;
-
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
-
-class MyButton extends JButton {
-    String text;
-    int x, y;
-    Game game;
-    Font customFont;
-
-    public MyButton(String text, int x, int y) {
-        this.setText(text);
-        this.setBounds(x, y, 200, 50);
-        this.setBorder(null);
-        this.setBackground(new Color(159, 0, 0));
-        this.setFocusPainted(false);
-        this.setForeground(Color.black);
-        this.setVisible(false);
-        this.setOpaque(true);
-
-        this.setActionCommand(text);
-
-        // add new font
-        try {
-            // create the font to use. Specify the size!
-            customFont = Font.createFont(Font.TRUETYPE_FONT, new File("A_Card_Game/Fonts/horizon.otf")).deriveFont(30f);
-            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            // register the font
-            ge.registerFont(customFont);
-        } catch (IOException | FontFormatException e) {
-            e.printStackTrace();
-        }
-
-        // set font to the text
-        this.setFont(customFont);
-    }
-}
 
 public class UI extends JFrame {
     // Menu screen
-    JButton startButton, ruleButton, backRuleButton, backGuideButton, guideButton;
+    MyButton startButton, ruleButton, backRuleButton, backGuideButton, guideButton;
     PaintPanel menu_canvas, rule_canvas, guide_canvas, stage_canvas;
 
     Game game;
@@ -72,14 +31,15 @@ public class UI extends JFrame {
         createMenu();
         createRule();
         createGuide();
-
+        
         this.setVisible(true);
     }
 
     private void createMenu() {
         menu_canvas = new PaintPanel(this, "menu.png");
-        menu_canvas.setBounds(0, 0, 1280, 800);
+        menu_canvas.setBounds(0,0,1280,800);
         menu_canvas.setOpaque(false); // allow orride the background image
+        
 
         startButton = new MyButton("START", 520, 450);
         startButton.addActionListener(game.aHandler);
@@ -102,7 +62,7 @@ public class UI extends JFrame {
 
     private void createRule() {
         rule_canvas = new PaintPanel(this, "rule.png");
-        rule_canvas.setBounds(0, 0, 1280, 800);
+        rule_canvas.setBounds(0,0,1280,800);
         rule_canvas.setOpaque(false); // allow orride the background image
 
         backRuleButton = new MyButton("BACK", 70, 34 * 2 - 8);
@@ -114,8 +74,9 @@ public class UI extends JFrame {
 
     private void createGuide() {
         guide_canvas = new PaintPanel(this, "guide.png");
-        guide_canvas.setBounds(0, 0, 1280, 800);
+        guide_canvas.setBounds(0,0,1280,800);
         guide_canvas.setOpaque(true); // allow orride the background image
+        
 
         backGuideButton = new MyButton("BACK", 70, 34 * 2 - 8);
         backRuleButton.setForeground(Color.WHITE);
@@ -123,16 +84,4 @@ public class UI extends JFrame {
         this.add(backGuideButton);
         this.add(guide_canvas);
     }
-
-    private void createWin() {
-        menu_canvas = new PaintPanel(this, "win.png");
-        menu_canvas.setBounds(0, 0, 1280, 800);
-        menu_canvas.setOpaque(false); // allow orride the background image
-
-        startButton = new MyButton("Try again", 520, 450);
-        startButton.addActionListener(game.aHandler);
-        startButton.setVisible(true);
-        this.add(startButton);
-    }
-
 }
