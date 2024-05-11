@@ -20,6 +20,8 @@ import javax.swing.Timer;
 
 import A_Card_Game.Function.draw_random;
 import A_Card_Game.Function.get_card_infor;
+// import button and win screen
+import A_Card_Game.UI;
 
 public class PlayPage {
     static Font customFont;
@@ -284,7 +286,7 @@ public class PlayPage {
                             timerCard.setRepeats(false); // Ensure the timer only runs once
                             timerCard.start(); // Start the timer
 
-                            Timer timer = new Timer(5000, event -> {
+                            Timer timer1 = new Timer(5000, event -> {
                                 // Code to execute after 20 seconds
                                 fifth_card.setVisible(false);
                                 second_card.setVisible(false);
@@ -303,16 +305,21 @@ public class PlayPage {
 
                             });
 
-                            timer.setRepeats(false); // Set to execute only once
-                            timer.start(); // Start the timer
+                            timer1.setRepeats(false); // Set to execute only once
+                            timer1.start(); // Start the timer
 
                             // Frame of the result
+
+                            Timer timer2 = new Timer(5000, event -> {
+
+                            });
 
                             break;
                     }
                     clickCount[0]++;
                 }
             }
+
         });
 
         buttonFrame.add(bet);

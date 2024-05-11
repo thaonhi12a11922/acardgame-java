@@ -29,12 +29,12 @@ class MyButton extends JButton {
         this.setForeground(Color.black);
         this.setVisible(false);
         this.setOpaque(true);
-        
+
         this.setActionCommand(text);
 
         // add new font
         try {
-            //create the font to use. Specify the size!
+            // create the font to use. Specify the size!
             customFont = Font.createFont(Font.TRUETYPE_FONT, new File("A_Card_Game/Fonts/horizon.otf")).deriveFont(30f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             // register the font
@@ -72,15 +72,14 @@ public class UI extends JFrame {
         createMenu();
         createRule();
         createGuide();
-        
+
         this.setVisible(true);
     }
 
     private void createMenu() {
         menu_canvas = new PaintPanel(this, "menu.png");
-        menu_canvas.setBounds(0,0,1280,800);
+        menu_canvas.setBounds(0, 0, 1280, 800);
         menu_canvas.setOpaque(false); // allow orride the background image
-        
 
         startButton = new MyButton("START", 520, 450);
         startButton.addActionListener(game.aHandler);
@@ -103,7 +102,7 @@ public class UI extends JFrame {
 
     private void createRule() {
         rule_canvas = new PaintPanel(this, "rule.png");
-        rule_canvas.setBounds(0,0,1280,800);
+        rule_canvas.setBounds(0, 0, 1280, 800);
         rule_canvas.setOpaque(false); // allow orride the background image
 
         backRuleButton = new MyButton("BACK", 70, 34 * 2 - 8);
@@ -115,9 +114,8 @@ public class UI extends JFrame {
 
     private void createGuide() {
         guide_canvas = new PaintPanel(this, "guide.png");
-        guide_canvas.setBounds(0,0,1280,800);
+        guide_canvas.setBounds(0, 0, 1280, 800);
         guide_canvas.setOpaque(true); // allow orride the background image
-        
 
         backGuideButton = new MyButton("BACK", 70, 34 * 2 - 8);
         backRuleButton.setForeground(Color.WHITE);
@@ -125,4 +123,16 @@ public class UI extends JFrame {
         this.add(backGuideButton);
         this.add(guide_canvas);
     }
+
+    private void createWin() {
+        menu_canvas = new PaintPanel(this, "win.png");
+        menu_canvas.setBounds(0, 0, 1280, 800);
+        menu_canvas.setOpaque(false); // allow orride the background image
+
+        startButton = new MyButton("Try again", 520, 450);
+        startButton.addActionListener(game.aHandler);
+        startButton.setVisible(true);
+        this.add(startButton);
+    }
+
 }
