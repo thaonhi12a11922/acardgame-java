@@ -267,6 +267,29 @@ public class get_card_infor {
             return 1; // High Card
     }
 
+    public String get_category_String() {
+        switch (this.get_category()) {
+            case 9:
+                return "Straight Flush";
+            case 8:
+                return "Four of a Kind";
+            case 7:
+                return "Full House";
+            case 6:
+                return "Flush";
+            case 5:
+                return "Straight";
+            case 4:
+                return "Three of a Kind";
+            case 3:
+                return "Two Pair";
+            case 2:
+                return "One Pair";
+            default:
+                return "High Card";
+        }
+    }
+
     private int compareString(String a, String b) {
         int x = a.compareTo(b);
         return Integer.compare(x, 0);

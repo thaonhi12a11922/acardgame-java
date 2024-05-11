@@ -243,8 +243,10 @@ public class PlayPage {
                 String[] best_combination_2 = hand.best_combination_cards(randomFunction.card_2, middle_cards);
 
                 hand.setHand(best_combination_1);
+                String hand1_category = hand.get_category_String();
                 get_card_infor best_hand2_infor = new get_card_infor();
                 best_hand2_infor.setHand(best_combination_2);
+                String hand2_category = best_hand2_infor.get_category_String();
                 int result = hand.compare_to(best_hand2_infor);
 
                 String result_;
@@ -299,6 +301,9 @@ public class PlayPage {
                                 buttonFrame.add(result_text);
                                 System.out.println(result_);
                                 result_text.setText(result_);
+                                // add result text of each hand
+                                result_text.setText("Hand 1 is" + hand1_category);
+                                result_text.setText("Hand 2 is" + hand2_category);
                                 result_text.setFont(new Font("Tahoma", Font.BOLD, 40));
                                 result_text.setEnabled(true);
                                 result_text.setVisible(true);
