@@ -14,8 +14,11 @@ import java.awt.GraphicsEnvironment;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.Timer;
 
 import A_Card_Game.Function.draw_random;
@@ -296,17 +299,23 @@ public class PlayPage {
                                 fourth_card.setVisible(false);
                                 first_card.setVisible(false);
 
-                                // Create a new JLabel for game result
-                                result_text = new JLabel("Game Result"); // Center-align the text
-                                buttonFrame.add(result_text);
-                                System.out.println(result_);
-                                result_text.setText(result_);
-                                // add result text of each hand
-                                result_text.setText("Hand 1 is" + hand1_category);
-                                result_text.setText("Hand 2 is" + hand2_category);
-                                result_text.setFont(new Font("Tahoma", Font.BOLD, 40));
-                                result_text.setEnabled(true);
-                                result_text.setVisible(true);
+                                JTextArea resultTextArea = new JTextArea();
+                                resultTextArea.setEditable(false); // Đảm bảo không thể chỉnh sửa nội dung
+                                resultTextArea.setLineWrap(true); // Tự động xuống dòng khi cần
+
+                                JScrollPane scrollPane = new JScrollPane(resultTextArea);
+
+                                String resultText = "Game Result:\n" +
+                                        result_ + "\n" +
+                                        "Hand 1 is " + hand1_category + "\n" +
+                                        "Hand 2 is " + hand2_category + "\n";
+
+                                resultTextArea.setText(resultText);
+                                buttonFrame.add(scrollPane);
+                                buttonFrame.setLocation(null);
+                                // Thiết lập hoạt động mặc định khi đóng cửa sổ
+                                // Hiển thị JFrame
+                                resultTextArea.setVisible(true);
 
                             });
 
