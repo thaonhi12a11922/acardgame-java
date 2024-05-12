@@ -111,7 +111,7 @@ public class YouLose extends JFrame {
         return buttonFrame;
     }
 
-    public static void main(String[] args) throws Exception {
-        displayResult();
-    }
+    // public static void main(String[] args) throws Exception {
+    //     displayResult();
+    // }
 }

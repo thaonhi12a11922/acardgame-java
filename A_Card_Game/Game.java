@@ -48,7 +48,7 @@ public class Game {
         ui.dispose(); //turn off menu screen
         
         try {
-            PlayPage.startGame(); //turn on game screen
+            PlayPage.startGame();
         } catch (Exception e) {
             e.printStackTrace();
         }

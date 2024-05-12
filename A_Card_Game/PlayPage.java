@@ -11,21 +11,21 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
+import java.awt.*;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.Timer;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 
 import A_Card_Game.Function.draw_random;
 import A_Card_Game.Function.get_card_infor;
-import A_Card_Game.YouLose;
 // import button and win screen
-import A_Card_Game.UI;
 
 public class PlayPage {
     static Font customFont;
@@ -46,6 +46,8 @@ public class PlayPage {
 
     static JLabel result_text;
 
+    static MyFrame myFrame = new MyFrame();
+
     // call random funtion
     static draw_random randomFunction = new draw_random();
     static get_card_infor hand = new get_card_infor();
@@ -62,8 +64,6 @@ public class PlayPage {
     public static void startGame() throws Exception {
         // define random function
         randomFunction.getRandomCards();
-
-        MyFrame myFrame = new MyFrame();
 
         myFrame.getContentPane().setBackground(new Color(26, 145, 85));
 
@@ -231,6 +231,8 @@ public class PlayPage {
 
         // Initialize a counter for the number of clicks
         final int[] clickCount = { 0 };
+
+        // Define the function for BET button
         bet.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Get the cards of Computer
@@ -247,6 +249,7 @@ public class PlayPage {
                 String[] best_combination_2 = hand.best_combination_cards(randomFunction.card_2, middle_cards);
 
                 hand.setHand(best_combination_1);
+
                 String hand1_category = hand.get_category_String();
                 get_card_infor best_hand2_infor = new get_card_infor();
                 best_hand2_infor.setHand(best_combination_2);
@@ -284,15 +287,15 @@ public class PlayPage {
                             fold.setVisible(false);
 
                             // Show up two cards of Computer
-                            Timer timerCard = new Timer(2000, event -> {
+                            Timer timer_showing_Card = new Timer(2000, event -> {
                                 p2_first_card.setIcon(add_image(cards_2[0]));
                                 p2_second_card.setIcon(add_image(cards_2[1]));
                             });
 
-                            timerCard.setRepeats(false); // Ensure the timer only runs once
-                            timerCard.start(); // Start the timer
+                            timer_showing_Card.setRepeats(false); // Ensure the timer only runs once
+                            timer_showing_Card.start(); // Start the timer
 
-                            Timer timer1 = new Timer(5000, event -> {
+                            Timer timer1 = new Timer(3000, event -> {
                                 // Code to execute after 20 seconds
                                 fifth_card.setVisible(false);
                                 second_card.setVisible(false);
@@ -300,39 +303,60 @@ public class PlayPage {
                                 fourth_card.setVisible(false);
                                 first_card.setVisible(false);
 
-                                JTextArea resultTextArea = new JTextArea();
-                                resultTextArea.setEditable(false);
-                                resultTextArea.setLineWrap(true);
 
-                                JScrollPane scrollPane = new JScrollPane(resultTextArea);
+                                // SHowing results
+                                JPanel showResult1 = new JPanel(new FlowLayout(FlowLayout.CENTER, 50, 0));
+                                showResult1.setBounds(400, 220, 500, 170);
+                                showResult1.setBackground(null);
+                                showResult1.setOpaque(true);
 
-                                String resultText = "Game Result:\n" +
-                                        result_ + "\n" +
-                                        "Hand 1 is " + hand1_category + "\n" +
-                                        "Hand 2 is " + hand2_category + "\n";
+                                JPanel showResult2 = new JPanel(new FlowLayout(FlowLayout.CENTER, 50, 0));
+                                showResult2.setBounds(400, 480, 500, 170);
+                                showResult2.setBackground(null);
+                                showResult2.setOpaque(true);
+                        
+                        
+                                JLabel hand1_result = new JLabel(hand1_category.toUpperCase(), JLabel.CENTER);
+                                hand1_result.setFont(new Font("Tahoma", Font.BOLD, 40));
+                                hand1_result.setForeground(new Color(243, 184, 184));
 
-                                resultTextArea.setText(resultText);
-                                buttonFrame.add(scrollPane);
-                                buttonFrame.setLocation(null);
-                                resultTextArea.setVisible(true);
+
+                                JLabel hand2_result = new JLabel(hand2_category.toUpperCase(), JLabel.CENTER);
+                                hand2_result.setFont(new Font("Tahoma", Font.BOLD, 40));
+                                hand2_result.setForeground(new Color(243, 184, 184));
+
+                                showResult1.add(hand1_result);
+                                showResult2.add(hand2_result);
+
+                                myFrame.add(showResult1);
+                                myFrame.add(showResult2);
 
                             });
 
-                            timer1.setRepeats(false); // Set to execute only once
+                            timer1.setRepeats(false); 
                             timer1.start(); // Start the timer
 
                             // Frame of the result
 
-                            Timer timer2 = new Timer(5000, event -> {
-                                try {
-                                    YouLose.displayResult();
-                                } catch (Exception e1) {
-                                    e1.printStackTrace();
-                                }
+                            // Delay by 2 seconds before jumping to the last screen
+                            Timer delayTimer = new Timer(2000, event -> {
+                                Timer timer2 = new Timer(5000, event2 -> {
+                                    myFrame.dispose();
+                                    try {
+                                        YouLose.displayResult();
+                                    } catch (Exception e1) {
+                                        e1.printStackTrace();
+                                    }
+                                });
 
+                                timer2.setRepeats(false); // Set to execute only once
+                                timer2.start(); // Start the timer
                             });
 
-                            break;
+                            delayTimer.setRepeats(false); // Set to execute only once
+                            delayTimer.start(); // Start the delay timer
+
+                            // break;
                     }
                     clickCount[0]++;
                 }
@@ -340,6 +364,21 @@ public class PlayPage {
 
         });
 
+        // Define the function for FOLD button
+        fold.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // dispose the screen
+                myFrame.dispose();
+                // show the GAME OVER page
+                try {
+                    YouLose.displayResult();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+
+        // Add two buttons into panel
         buttonFrame.add(bet);
         buttonFrame.add(fold);
         return buttonFrame;
