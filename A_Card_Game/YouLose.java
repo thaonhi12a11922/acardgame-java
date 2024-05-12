@@ -10,20 +10,18 @@ public class YouLose extends JFrame {
     static Font customFont;
     static MyFrame myFrame = new MyFrame();
 
-    public static void displayResult() throws Exception {
-
+    public static void displayResult(String word) throws Exception {
         myFrame.getContentPane().setBackground(new Color(26, 145, 85));
         // add Gameover frame
-        JPanel textFrame = createText();
+        JPanel textFrame = createText(word);
         myFrame.add(textFrame);
         // add button Frame
         JPanel buttonFrame = createButtonFrame();
         myFrame.add(buttonFrame);
         myFrame.setVisible(true);
-
     }
 
-    private static JPanel createText() throws Exception {
+    private static JPanel createText(String word) throws Exception {
         try {
             customFont = Font.createFont(Font.TRUETYPE_FONT, new File("A_Card_Game/Fonts/Moul-Regular.ttf"))
                     .deriveFont(80f);
@@ -36,17 +34,9 @@ public class YouLose extends JFrame {
         textFrame.setBounds(300, 280, 750, 159);
         textFrame.setBackground(new Color(26, 145, 85));
 
-        JLabel gameOverLabel = new JLabel("GAME OVER", JLabel.CENTER);
+        JLabel gameOverLabel = new JLabel(word, JLabel.CENTER); // Use the provided word parameter here
         gameOverLabel.setFont(customFont);
         gameOverLabel.setForeground(new Color(158, 39, 39));
-
-        // JLabel youWinLabel = new JLabel("YOU WIN!!!", JLabel.CENTER);
-        // youWinLabel.setFont(customFont);
-        // youWinLabel.setForeground(new Color(243, 184, 184));
-
-        // JLabel tieLabel = new JLabel("YOU TIE!!!", JLabel.CENTER);
-        // tieLabel.setFont(customFont);
-        // tieLabel.setForeground(Color.WHITE);
 
         textFrame.add(gameOverLabel);
         return textFrame;
@@ -112,6 +102,6 @@ public class YouLose extends JFrame {
     }
 
     // public static void main(String[] args) throws Exception {
-    //     displayResult();
+    // displayResult();
     // }
 }

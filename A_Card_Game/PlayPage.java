@@ -259,11 +259,11 @@ public class PlayPage {
                 String result_;
                 // Printing the result
                 if (result > 0) {
-                    result_ = "You win!";
+                    result_ = "YOU WIN!";
                 } else if (result < 0) {
-                    result_ = "You lose!";
+                    result_ = "GAME OVER!";
                 } else {
-                    result_ = "It's a tie!";
+                    result_ = "IT IS A TIE!";
                 }
 
                 // Check if the click count is less than the number of cards
@@ -303,7 +303,6 @@ public class PlayPage {
                                 fourth_card.setVisible(false);
                                 first_card.setVisible(false);
 
-
                                 // SHowing results
                                 JPanel showResult1 = new JPanel(new FlowLayout(FlowLayout.CENTER, 50, 0));
                                 showResult1.setBounds(400, 220, 500, 170);
@@ -314,12 +313,10 @@ public class PlayPage {
                                 showResult2.setBounds(400, 480, 500, 170);
                                 showResult2.setBackground(null);
                                 showResult2.setOpaque(true);
-                        
-                        
+
                                 JLabel hand1_result = new JLabel(hand1_category.toUpperCase(), JLabel.CENTER);
                                 hand1_result.setFont(new Font("Tahoma", Font.BOLD, 40));
                                 hand1_result.setForeground(new Color(243, 184, 184));
-
 
                                 JLabel hand2_result = new JLabel(hand2_category.toUpperCase(), JLabel.CENTER);
                                 hand2_result.setFont(new Font("Tahoma", Font.BOLD, 40));
@@ -333,7 +330,7 @@ public class PlayPage {
 
                             });
 
-                            timer1.setRepeats(false); 
+                            timer1.setRepeats(false);
                             timer1.start(); // Start the timer
 
                             // Frame of the result
@@ -343,7 +340,7 @@ public class PlayPage {
                                 Timer timer2 = new Timer(5000, event2 -> {
                                     myFrame.dispose();
                                     try {
-                                        YouLose.displayResult();
+                                        YouLose.displayResult(result_);
                                     } catch (Exception e1) {
                                         e1.printStackTrace();
                                     }
@@ -371,7 +368,7 @@ public class PlayPage {
                 myFrame.dispose();
                 // show the GAME OVER page
                 try {
-                    YouLose.displayResult();
+                    YouLose.displayResult("GAME OVER");
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
