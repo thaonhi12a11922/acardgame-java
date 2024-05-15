@@ -11,17 +11,12 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
-import java.awt.*;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.Timer;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
 
 import A_Card_Game.Function.draw_random;
 import A_Card_Game.Function.get_card_infor;
