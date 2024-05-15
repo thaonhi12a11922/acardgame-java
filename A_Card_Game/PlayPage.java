@@ -197,6 +197,25 @@ public class PlayPage {
         return fiveCards;
     }
 
+    public static void resetStaticVariables() {
+        // Reset each static variable to its initial state
+        round = null;
+        roundText = null;
+        p1_first_card = new JLabel();
+        p1_second_card = new JLabel();
+        p2_first_card = new JLabel();
+        p2_second_card = new JLabel();
+        first_card = new JLabel();
+        second_card = new JLabel();
+        third_card = new JLabel();
+        fourth_card = new JLabel();
+        fifth_card = new JLabel();
+        myFrame = new MyFrame();
+        randomFunction = new draw_random();
+        hand = new get_card_infor();
+        // Reset any other static variables here...
+    }
+
     private static JPanel createButtonFrame() throws Exception {
         JPanel buttonFrame = new JPanel(new FlowLayout(FlowLayout.LEADING, 55, 0));
         buttonFrame.setBounds(460, 480, 500, 100);
