@@ -1,16 +1,22 @@
 package A_Card_Game;
 
 import javax.swing.*;
+
+import A_Card_Game.Img.MusicHandler;
+
 import java.awt.*;
 import java.io.File;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class YouLose extends JFrame {
+public class Endscreen extends JFrame {
     static Font customFont;
     static MyFrame myFrame = new MyFrame();
+    static String endMusic = "A_Card_Game/Music/ending.wav";
 
     public static void displayResult(String word) throws Exception {
+        MusicHandler.playMusic("A_Card_Game/Music/ending.wav");
+
         myFrame.getContentPane().setBackground(new Color(26, 145, 85));
         // add Gameover frame
         JPanel textFrame = createText(word);
@@ -19,6 +25,7 @@ public class YouLose extends JFrame {
         JPanel buttonFrame = createButtonFrame();
         myFrame.add(buttonFrame);
         myFrame.setVisible(true);
+        MusicHandler.playMusic("A_Card_Game/Music/ending.wav");
     }
 
     private static JPanel createText(String word) throws Exception {

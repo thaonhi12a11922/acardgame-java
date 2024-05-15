@@ -1,8 +1,6 @@
 package A_Card_Game.Function;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class get_card_infor {
 
@@ -20,67 +18,8 @@ public class get_card_infor {
     private String[] isTwoPair = new String[2];
     private String isOnePair;
 
-    // Function to generate combinations of 3 cards from given 5 cards
-    public static List<String[]> getCombinations(String[] fiveCards) {
-        List<String[]> combinations = new ArrayList<>();
-        generateCombinations(fiveCards, 0, new String[3], 0, combinations);
-        return combinations;
-    }
-
-    // Recursive function to generate combinations
-    private static void generateCombinations(String[] fiveCards, int start, String[] combination, int index,
-            List<String[]> combinations) {
-        if (index == 3) {
-            combinations.add(combination.clone());
-            return;
-        }
-
-        for (int i = start; i <= fiveCards.length - 3 + index; i++) {
-            combination[index] = fiveCards[i];
-            generateCombinations(fiveCards, i + 1, combination, index + 1, combinations);
-        }
-    }
-
-    // Function to find the best combination of 5 cards
-    public String[] best_combination_cards(String[] two_cards, String[] five_cards) {
-        // get the best combination of 5 cards
-        String[] best_cards = new String[5];
-        best_cards[0] = two_cards[0];
-        best_cards[1] = two_cards[1];
-        best_cards[2] = five_cards[0];
-        best_cards[3] = five_cards[1];
-        best_cards[4] = five_cards[2];
-
-        String[] current_card = new String[5];
-        current_card[0] = two_cards[0];
-        current_card[1] = two_cards[1];
-
-        List<String[]> combinations = getCombinations(five_cards);
-        for (String[] combination : combinations) {
-
-            for (int i = 0; i < 3; i++) {
-                current_card[i + 2] = combination[i];
-            }
-
-            get_card_infor best_card = new get_card_infor();
-            get_card_infor current_card_info = new get_card_infor();
-            best_card.setHand(best_cards);
-            current_card_info.setHand(current_card);
-            int result = best_card.compare_to(current_card_info);
-
-            if (result == 1) {
-                best_cards[0] = current_card[0];
-                best_cards[1] = current_card[1];
-                best_cards[2] = current_card[2];
-                best_cards[3] = current_card[3];
-                best_cards[4] = current_card[4];
-            }
-        }
-        return best_cards;
-    }
-
     // Function to set the hand of cards and initialize card attributes
-    public void setHand(String[] hand) {
+    public get_card_infor(String[] hand) {
         validateInput(hand);
         this.cards = hand;
         this.card_rank = getCardRank();
@@ -247,6 +186,7 @@ public class get_card_infor {
     }
 
     public int get_category() {
+
         if (this.isStraightFlush())
             return 9;
         else if (this.isFourOfAKind())
@@ -268,7 +208,8 @@ public class get_card_infor {
     }
 
     public String get_category_String() {
-        switch (this.get_category()) {
+        int number = this.get_category();
+        switch (number) {
             case 9:
                 return "Straight Flush";
             case 8:

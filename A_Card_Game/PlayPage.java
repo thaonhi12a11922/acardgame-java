@@ -20,6 +20,10 @@ import javax.swing.Timer;
 
 import A_Card_Game.Function.draw_random;
 import A_Card_Game.Function.get_card_infor;
+import A_Card_Game.Img.MusicHandler;
+import A_Card_Game.Function.CardCombinationUtil;
+import A_Card_Game.Endscreen;
+
 // import button and win screen
 
 public class PlayPage {
@@ -42,10 +46,10 @@ public class PlayPage {
     static JLabel result_text;
 
     static MyFrame myFrame = new MyFrame();
-
     // call random funtion
     static draw_random randomFunction = new draw_random();
-    static get_card_infor hand = new get_card_infor();
+    static String suffleMusic = "A_Card_Game/Music/shuffle-cards.wav";
+    static String endingMusic = "A_Card_Game/Music/ending.wav";
 
     public static ImageIcon add_image(String file_name) {
         ImageIcon image = new ImageIcon("A_Card_Game/Card Image/" + file_name + ".png");
@@ -212,7 +216,10 @@ public class PlayPage {
         fifth_card = new JLabel();
         myFrame = new MyFrame();
         randomFunction = new draw_random();
-        hand = new get_card_infor();
+        String result_ = new String();
+        String hand1_category = new String();
+        String hand2_category = new String();
+
         // Reset any other static variables here...
     }
 
@@ -247,60 +254,77 @@ public class PlayPage {
         final int[] clickCount = { 0 };
 
         // Define the function for BET button
+
+        // Get the cards of Computer
+        String[] cards_1 = randomFunction.card_1;
+        String[] cards_2 = randomFunction.card_2;
+        // Get the middle list
+        String[] middle_cards = randomFunction.middle_list;
+
+        String[] best_combination_1 = CardCombinationUtil.bestCombinationCards(cards_1, middle_cards);
+        String[] best_combination_2 = CardCombinationUtil.bestCombinationCards(cards_2, middle_cards);
+
+        System.out.println("best_combination_1 = ");
+
+        for (int i = 0; i < best_combination_1.length; i++) {
+            System.out.println(best_combination_1[i]);
+        }
+
+        System.out.println("best_combination_2 = ");
+
+        for (int j = 0; j < best_combination_2.length; j++) {
+            System.out.println(best_combination_2[j]);
+        }
+
+        get_card_infor best_hand1_infor = new get_card_infor(best_combination_1);
+        String hand1_category = best_hand1_infor.get_category_String();
+
+        get_card_infor best_hand2_infor = new get_card_infor(best_combination_2);
+        String hand2_category = best_hand2_infor.get_category_String();
+
+        System.out.println("Hand 2" + hand2_category);
+        int result = best_hand1_infor.compare_to(best_hand2_infor);
+
+        String result_;
+        // Printing the result
+        if (result > 0) {
+            result_ = "YOU WIN!";
+        } else if (result < 0) {
+            result_ = "GAME OVER!";
+        } else {
+            result_ = "IT IS A TIE!";
+        }
+
         bet.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Get the cards of Computer
-                String[] cards_2 = randomFunction.card_2;
-                // Get the middle list
-                String[] middle_cards = randomFunction.middle_list;
-
-                // take best combination between middle card and first card
-                for (String middle_card : randomFunction.card_1) {
-                    System.out.println(middle_card);
-                }
-
-                String[] best_combination_1 = hand.best_combination_cards(randomFunction.card_1, middle_cards);
-                String[] best_combination_2 = hand.best_combination_cards(randomFunction.card_2, middle_cards);
-
-                hand.setHand(best_combination_1);
-
-                String hand1_category = hand.get_category_String();
-                get_card_infor best_hand2_infor = new get_card_infor();
-                best_hand2_infor.setHand(best_combination_2);
-                String hand2_category = best_hand2_infor.get_category_String();
-                int result = hand.compare_to(best_hand2_infor);
-
-                String result_;
-                // Printing the result
-                if (result > 0) {
-                    result_ = "YOU WIN!";
-                } else if (result < 0) {
-                    result_ = "GAME OVER!";
-                } else {
-                    result_ = "IT IS A TIE!";
-                }
 
                 // Check if the click count is less than the number of cards
                 if (clickCount[0] < middle_cards.length) {
                     // Use a switch statement to set the icon for the correct card
                     switch (clickCount[0]) {
                         case 0:
+                            MusicHandler.playMusic(suffleMusic);
+                            // Play music using Music handler function
+
                             first_card.setIcon(add_image(middle_cards[0]));
                             second_card.setIcon(add_image(middle_cards[1]));
                             third_card.setIcon(add_image(middle_cards[2]));
                             roundText.setText("Round  2");
                             break;
                         case 1:
+                            MusicHandler.playMusic(suffleMusic);
                             fourth_card.setIcon(add_image(middle_cards[3]));
                             roundText.setText("Round  3");
                             break;
                         case 2:
+                            MusicHandler.playMusic(suffleMusic);
                             fifth_card.setIcon(add_image(middle_cards[4]));
                             roundText.setText("Round  4");
                             bet.setVisible(false);
                             fold.setVisible(false);
 
                             // Show up two cards of Computer
+                            MusicHandler.playMusic(suffleMusic);
                             Timer timer_showing_Card = new Timer(2000, event -> {
                                 p2_first_card.setIcon(add_image(cards_2[0]));
                                 p2_second_card.setIcon(add_image(cards_2[1]));
@@ -309,15 +333,16 @@ public class PlayPage {
                             timer_showing_Card.setRepeats(false); // Ensure the timer only runs once
                             timer_showing_Card.start(); // Start the timer
 
-                            Timer timer1 = new Timer(3000, event -> {
-                                // Code to execute after 20 seconds
+                            Timer timer1 = new Timer(10000, event -> {
+                                // SHowing results
+
+                                // Disappear after
                                 fifth_card.setVisible(false);
                                 second_card.setVisible(false);
                                 third_card.setVisible(false);
                                 fourth_card.setVisible(false);
                                 first_card.setVisible(false);
 
-                                // SHowing results
                                 JPanel showResult1 = new JPanel(new FlowLayout(FlowLayout.CENTER, 50, 0));
                                 showResult1.setBounds(400, 220, 500, 170);
                                 showResult1.setBackground(null);
@@ -341,20 +366,22 @@ public class PlayPage {
 
                                 myFrame.add(showResult1);
                                 myFrame.add(showResult2);
+                                MusicHandler.playMusic(endingMusic);
 
                             });
 
                             timer1.setRepeats(false);
                             timer1.start(); // Start the timer
-
+                            MusicHandler.playMusic(endingMusic);
                             // Frame of the result
 
                             // Delay by 2 seconds before jumping to the last screen
-                            Timer delayTimer = new Timer(2000, event -> {
-                                Timer timer2 = new Timer(5000, event2 -> {
+                            Timer delayTimer = new Timer(5000, event -> {
+                                Timer timer2 = new Timer(8000, event2 -> {
                                     myFrame.dispose();
                                     try {
-                                        YouLose.displayResult(result_);
+                                        MusicHandler.playMusic(endingMusic);
+                                        Endscreen.displayResult(result_);
                                     } catch (Exception e1) {
                                         e1.printStackTrace();
                                     }
@@ -382,7 +409,7 @@ public class PlayPage {
                 myFrame.dispose();
                 // show the GAME OVER page
                 try {
-                    YouLose.displayResult("GAME OVER");
+                    Endscreen.displayResult("GAME OVER");
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
