@@ -43,7 +43,7 @@ public class PlayPage {
 
     static MyFrame myFrame;
     // call random funtion
-    static draw_random randomFunction = new draw_random();
+    static draw_random randomFunction;
     static String suffleMusic = "A_Card_Game/Music/shuffle-cards.wav";
     static String endingMusic = "A_Card_Game/Music/ending.wav";
 
@@ -81,6 +81,25 @@ public class PlayPage {
         myFrame.add(buttonFrame);
 
         myFrame.setVisible(true);
+    }
+
+    public static void resetStaticVariables() {
+        // Reset each static variable to its initial state
+        round = null;
+        roundText = null;
+        p1_first_card = new JLabel();
+        p1_second_card = new JLabel();
+        p2_first_card = new JLabel();
+        p2_second_card = new JLabel();
+        first_card = new JLabel();
+        second_card = new JLabel();
+        third_card = new JLabel();
+        fourth_card = new JLabel();
+        fifth_card = new JLabel();
+        myFrame = new MyFrame();
+        randomFunction = new draw_random();
+        customFont = new Font("Tahoma", Font.BOLD, 42);
+
     }
 
     private static JPanel createRoundPanel() throws Exception {
@@ -185,26 +204,6 @@ public class PlayPage {
         fiveCards.add(fifth_card);
 
         return fiveCards;
-    }
-
-    public static void resetStaticVariables() {
-        // Reset each static variable to its initial state
-        round = null;
-        roundText = null;
-        p1_first_card = new JLabel();
-        p1_second_card = new JLabel();
-        p2_first_card = new JLabel();
-        p2_second_card = new JLabel();
-        first_card = new JLabel();
-        second_card = new JLabel();
-        third_card = new JLabel();
-        fourth_card = new JLabel();
-        fifth_card = new JLabel();
-        myFrame = new MyFrame();
-        randomFunction = new draw_random();
-        customFont = new Font("Tahoma", Font.BOLD, 42);
-
-        // Reset any other static variables here...
     }
 
     private static JPanel createButtonFrame() throws Exception {
@@ -318,7 +317,7 @@ public class PlayPage {
                             timer_showing_Card.setRepeats(false); // Ensure the timer only runs once
                             timer_showing_Card.start(); // Start the timer
 
-                            Timer timer1 = new Timer(10000, event -> {
+                            Timer timer1 = new Timer(7000, event -> {
                                 // SHowing results
 
                                 // Disappear after
@@ -361,7 +360,7 @@ public class PlayPage {
                             // Frame of the result
 
                             // Delay by 2 seconds before jumping to the last screen
-                            Timer delayTimer = new Timer(5000, event -> {
+                            Timer delayTimer = new Timer(4000, event -> {
                                 Timer timer2 = new Timer(8000, event2 -> {
                                     myFrame.dispose();
                                     try {
