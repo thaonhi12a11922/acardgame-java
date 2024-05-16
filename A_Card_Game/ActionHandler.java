@@ -22,8 +22,8 @@ public class ActionHandler implements ActionListener {
                     e1.printStackTrace();
                 }
                 break;
-            case "RULE":
-                game.menuToRule();
+            case "INTRO":
+                game.menuToIntro();
             case "GUIDE":
                 game.menuToGuide();
                 break;

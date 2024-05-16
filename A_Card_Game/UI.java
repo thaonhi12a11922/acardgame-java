@@ -9,8 +9,8 @@ import javax.swing.JFrame;
 
 public class UI extends JFrame {
     // Menu screen
-    MyButton startButton, ruleButton, backRuleButton, backGuideButton, guideButton;
-    PaintPanel menu_canvas, rule_canvas, guide_canvas, stage_canvas;
+    MyButton startButton, introButton, backIntroButton, backGuideButton, guideButton;
+    PaintPanel menu_canvas, intro_canvas, guide_canvas;
 
     Game game;
 
@@ -25,11 +25,11 @@ public class UI extends JFrame {
         this.setLayout(null);
         this.getContentPane().setBackground(Color.white);
 
-        ImageIcon icon_image = new ImageIcon("A_Card_Game/IMAGE/icon.png"); // create an imageicon
+        ImageIcon icon_image = new ImageIcon("A_Card_Game/Background/icon.png"); // create an imageicon
         this.setIconImage(icon_image.getImage()); // change the default icon into new icon
 
         createMenu();
-        createRule();
+        createIntro();
         createGuide();
         
         this.setVisible(true);
@@ -44,32 +44,32 @@ public class UI extends JFrame {
         startButton = new MyButton("START", 520, 450);
         startButton.addActionListener(game.aHandler);
 
-        ruleButton = new MyButton("RULE", 520, 500 + 20);
-        ruleButton.addActionListener(game.aHandler);
+        introButton = new MyButton("INTRO", 520, 500 + 20);
+        introButton.addActionListener(game.aHandler);
 
         guideButton = new MyButton("GUIDE", 520, 550 + 40);
         guideButton.addActionListener(game.aHandler);
 
         startButton.setVisible(true);
-        ruleButton.setVisible(true);
+        introButton.setVisible(true);
         guideButton.setVisible(true);
 
         this.add(startButton);
-        this.add(ruleButton);
+        this.add(introButton);
         this.add(guideButton);
         this.add(menu_canvas);
     }
 
-    private void createRule() {
-        rule_canvas = new PaintPanel(this, "rule.png");
-        rule_canvas.setBounds(0,0,1280,800);
-        rule_canvas.setOpaque(false); // allow orride the background image
+    private void createIntro() {
+        intro_canvas = new PaintPanel(this, "intro.png");
+        intro_canvas.setBounds(0,0,1280,800);
+        intro_canvas.setOpaque(false); // allow orride the background image
 
-        backRuleButton = new MyButton("BACK", 70, 34 * 2 - 8);
-        backRuleButton.setForeground(Color.WHITE);
-        backRuleButton.addActionListener(game.aHandler);
-        this.add(backRuleButton);
-        this.add(rule_canvas);
+        backIntroButton = new MyButton("BACK", 70, 34 * 2 - 8);
+        backIntroButton.setForeground(Color.WHITE);
+        backIntroButton.addActionListener(game.aHandler);
+        this.add(backIntroButton);
+        this.add(intro_canvas);
     }
 
     private void createGuide() {
@@ -79,7 +79,7 @@ public class UI extends JFrame {
         
 
         backGuideButton = new MyButton("BACK", 70, 34 * 2 - 8);
-        backRuleButton.setForeground(Color.WHITE);
+        backGuideButton.setForeground(Color.WHITE);
         backGuideButton.addActionListener(game.aHandler);
         this.add(backGuideButton);
         this.add(guide_canvas);
