@@ -203,13 +203,13 @@ public class get_card_infor {
         for (int i = 0; i < card_rank.length - 1; i++) {
             if (card_rank[i].equals(card_rank[i + 1])) {
                 isOnePair = card_rank[i];
-                System.out.println(card_rank[i]);
+                System.out.println("One pair: " + card_rank[i]);
 
                 int count_kicker = 0;
                 // add kicker of Is One Pair
                 for (int j = card_rank.length - 1; j >= 0; j--) {
                     if (!isOnePair.equals(card_rank[j])) {
-                        System.out.println(card_rank[j]);
+                        System.out.println("Add to kicker" + card_rank[j]);
                         isOnePair_kicker[count_kicker] = card_rank[j];
                         count_kicker++;
                     }
@@ -268,6 +268,9 @@ public class get_card_infor {
     }
 
     private int compareString(String a, String b) {
+        if ((a == null) || (b == null)) {
+            return 0;
+        }
         int x = a.compareTo(b);
         return Integer.compare(x, 0);
     }
