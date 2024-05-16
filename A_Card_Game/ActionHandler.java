@@ -3,9 +3,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ActionHandler implements ActionListener {
-    Game game;
+    Menu game;
 
-    public ActionHandler(Game game){
+    public ActionHandler(Menu game){
         this.game = game;
     }
 

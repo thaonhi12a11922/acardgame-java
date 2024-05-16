@@ -11,7 +11,7 @@ import java.io.IOException;
 public class MyButton extends JButton {
     String text;
     int x, y;
-    Game game;
+    Menu game;
     Font customFont;
 
     public MyButton(String text, int x, int y) {

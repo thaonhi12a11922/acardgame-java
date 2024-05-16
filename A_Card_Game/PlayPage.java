@@ -99,7 +99,6 @@ public class PlayPage {
         myFrame = new MyFrame();
         randomFunction = new draw_random();
         customFont = new Font("Tahoma", Font.BOLD, 42);
-
     }
 
     private static JPanel createRoundPanel() throws Exception {

@@ -1,20 +1,17 @@
 package A_Card_Game;
-/*
-    Description: handle all UI extends JFrame
-*/
 
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
-public class UI extends JFrame {
+public class MenuUI extends JFrame {
     // Menu screen
     MyButton startButton, introButton, backIntroButton, backGuideButton, guideButton;
     PaintPanel menu_canvas, intro_canvas, guide_canvas;
 
-    Game game;
+    Menu game;
 
-    public UI(Game game) {
+    public MenuUI(Menu game) {
         this.game = game;
 
         this.setTitle("Poker hand");

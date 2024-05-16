@@ -1,17 +1,13 @@
 package A_Card_Game;
-/*
-    Description: handle the game play
-*/
 
-public class Game {
+public class Menu {
     ActionHandler aHandler = new ActionHandler(this);
-    UI ui = new UI(this);
+    MenuUI ui = new MenuUI(this);
 
-    public Game() {
+    public Menu() {
     }
 
     // change in frontend of menu, rule, guide, and game play
-
     private void statusMenu(boolean status) {
         ui.menu_canvas.setVisible(status);
         ui.guideButton.setVisible(status);

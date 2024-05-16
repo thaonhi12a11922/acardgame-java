@@ -10,11 +10,11 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 public class PaintPanel extends JPanel implements ActionListener {
-    UI ui;
+    MenuUI ui;
     BufferedImage bg_img;
     String image_name;
 
-    public PaintPanel(UI ui, String image_name){
+    public PaintPanel(MenuUI ui, String image_name){
         this.ui = ui;
         
         try {
