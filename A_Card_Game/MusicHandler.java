@@ -1,4 +1,4 @@
-package A_Card_Game.Img;
+package A_Card_Game;
 
 import javax.sound.sampled.*;
 import javax.swing.*;

@@ -14,6 +14,7 @@ public class get_card_infor {
     private String isStraight;
     private String isStraightFlush;
     private String isFourOfAKind;
+    private String isFourOfAKind_kicker;
     private String[] isFullHouse = new String[2];
     private String isThreeOfAKind;
     private String[] isTwoPair = new String[2];
@@ -138,6 +139,11 @@ public class get_card_infor {
             if (card_rank[i].equals(card_rank[i + 1]) && card_rank[i].equals(card_rank[i + 2])
                     && card_rank[i].equals(card_rank[i + 3])) {
                 isFourOfAKind = card_rank[i + 3];
+                if (i == 0) {
+                    isFourOfAKind_kicker = card_rank[i + 4];
+                } else {
+                    isFourOfAKind_kicker = card_rank[0];
+                }
                 return true;
             }
         }
@@ -285,8 +291,13 @@ public class get_card_infor {
             switch (hand1) {
                 case 9:
                     return compareString(isStraightFlush, otherHand.isStraightFlush);
-                case 8:
-                    return compareString(isFourOfAKind, otherHand.isFourOfAKind);
+                case 8: {
+                    int index = compareString(isFourOfAKind, otherHand.isFourOfAKind);
+                    if (index == 0) {
+                        index = compareString(isFourOfAKind_kicker, otherHand.isFourOfAKind_kicker);
+                    }
+                    return index;
+                }
                 case 7:
                     int index = compareString(isFullHouse[0], otherHand.isFullHouse[0]);
                     return (index == 0) ? compareString(isFullHouse[1], otherHand.isFullHouse[1]) : index;

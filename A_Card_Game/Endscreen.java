@@ -2,8 +2,6 @@ package A_Card_Game;
 
 import javax.swing.*;
 
-import A_Card_Game.Img.MusicHandler;
-
 import java.awt.*;
 import java.io.File;
 import java.awt.event.ActionEvent;
