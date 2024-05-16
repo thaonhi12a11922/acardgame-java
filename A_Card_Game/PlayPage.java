@@ -42,8 +42,6 @@ public class PlayPage {
     static JLabel fourth_card = new JLabel();
     static JLabel fifth_card = new JLabel();
 
-    static JLabel result_text;
-
     static MyFrame myFrame = new MyFrame();
     // call random funtion
     static draw_random randomFunction = new draw_random();
@@ -215,9 +213,7 @@ public class PlayPage {
         fifth_card = new JLabel();
         myFrame = new MyFrame();
         randomFunction = new draw_random();
-        String result_ = new String();
-        String hand1_category = new String();
-        String hand2_category = new String();
+        customFont = new Font("Tahoma", Font.BOLD, 42);
 
         // Reset any other static variables here...
     }
@@ -266,13 +262,13 @@ public class PlayPage {
         System.out.println("best_combination_1 = ");
 
         for (int i = 0; i < best_combination_1.length; i++) {
-            System.out.println(best_combination_1[i]);
+            System.out.print(best_combination_1[i] + " ");
         }
 
         System.out.println("best_combination_2 = ");
 
         for (int j = 0; j < best_combination_2.length; j++) {
-            System.out.println(best_combination_2[j]);
+            System.out.print(best_combination_2[j] + " ");
         }
 
         get_card_infor best_hand1_infor = new get_card_infor(best_combination_1);
@@ -281,14 +277,15 @@ public class PlayPage {
         get_card_infor best_hand2_infor = new get_card_infor(best_combination_2);
         String hand2_category = best_hand2_infor.get_category_String();
 
-        System.out.println("Hand 2" + hand2_category);
+        System.out.println("Hand 1:" + hand1_category);
+        System.out.println("Hand 2:" + hand2_category);
         int result = best_hand1_infor.compare_to(best_hand2_infor);
 
         String result_;
         // Printing the result
         if (result < 0) {
             result_ = "YOU WIN!";
-        } else if (result < 0) {
+        } else if (result > 0) {
             result_ = "GAME OVER!";
         } else {
             result_ = "IT IS A TIE!";
