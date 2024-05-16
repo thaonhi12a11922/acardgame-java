@@ -98,7 +98,7 @@ public class Endscreen extends JFrame {
         exitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // dispose the screen
-                myFrame.dispose();
+                System.exit(0);
             }
         });
 

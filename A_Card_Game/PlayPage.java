@@ -21,7 +21,6 @@ import javax.swing.Timer;
 import A_Card_Game.Function.draw_random;
 import A_Card_Game.Function.get_card_infor;
 import A_Card_Game.Function.CardCombinationUtil;
-import A_Card_Game.Endscreen;
 
 // import button and win screen
 
@@ -42,7 +41,7 @@ public class PlayPage {
     static JLabel fourth_card = new JLabel();
     static JLabel fifth_card = new JLabel();
 
-    static MyFrame myFrame = new MyFrame();
+    static MyFrame myFrame;
     // call random funtion
     static draw_random randomFunction = new draw_random();
     static String suffleMusic = "A_Card_Game/Music/shuffle-cards.wav";
@@ -95,7 +94,7 @@ public class PlayPage {
         try {
             // create the font to use. Specify the size!
             customFont = Font.createFont(Font.TRUETYPE_FONT, new File("A_Card_Game/Fonts/Moul-Regular.ttf"))
-                    .deriveFont(42f);
+                    .deriveFont(50f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             // register the font
             ge.registerFont(customFont);
@@ -128,15 +127,10 @@ public class PlayPage {
 
         p2_name.setFont(new Font("Tahoma", Font.BOLD, 20));
 
-        JLabel p2_score = new JLabel("$800", JLabel.CENTER);
-        p2_score.setForeground(Color.WHITE);
-        p2_score.setFont(new Font("Tahoma", Font.BOLD, 20));
-
         JPanel p2_info = new JPanel(new GridLayout(2, 1));
         p2_info.setBackground(new Color(0, 0, 0, 0));
         p2_info.setBounds(0, 0, 500, 170);
         p2_info.add(p2_name);
-        p2_info.add(p2_score);
 
         player2.add(p2_info);
         return player2;
@@ -163,14 +157,9 @@ public class PlayPage {
         Font nameFont = new Font("Tahoma", Font.BOLD, 20);
         p1_name.setFont(nameFont);
 
-        JLabel p1_score = new JLabel("$1000", JLabel.CENTER);
-        p1_score.setForeground(Color.WHITE);
-        p1_score.setFont(nameFont);
-
         JPanel p1_info = new JPanel(new GridLayout(2, 1));
         p1_info.setBackground(new Color(0, 0, 0, 0));
         p1_info.add(p1_name);
-        p1_info.add(p1_score);
 
         player1.add(p1_info);
         return player1;
@@ -246,7 +235,7 @@ public class PlayPage {
         fold.setOpaque(true);
 
         // Initialize a counter for the number of clicks
-        final int[] clickCount = { 0 };
+        final int[] clickCount = {0};
 
         // Define the function for BET button
 
