@@ -287,7 +287,7 @@ public class PlayPage {
 
         String result_;
         // Printing the result
-        if (result > 0) {
+        if (result < 0) {
             result_ = "YOU WIN!";
         } else if (result < 0) {
             result_ = "GAME OVER!";

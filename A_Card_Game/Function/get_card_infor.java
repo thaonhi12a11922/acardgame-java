@@ -10,6 +10,7 @@ public class get_card_infor {
     private String[] card_rank;
     private String[] card_suit;
     private String isFlush;
+    private String[] isFlush_sequence_rank;
     private String isStraight;
     private String isStraightFlush;
     private String isFourOfAKind;
@@ -17,6 +18,9 @@ public class get_card_infor {
     private String isThreeOfAKind;
     private String[] isTwoPair = new String[2];
     private String isOnePair;
+    private String isTwoPair_highestkick;
+    private String[] isOnePair_kicker = new String[3];
+    private String[] isThreeOfAKind_kicker = new String[2];
 
     // Function to set the hand of cards and initialize card attributes
     public get_card_infor(String[] hand) {
@@ -86,7 +90,9 @@ public class get_card_infor {
                 return false;
             }
         }
-        isFlush = card_rank[4];
+        for (int j = card_rank.length - 2; j >= 0; j--) {
+            isFlush_sequence_rank[j] = card_suit[j];
+        }
         return true;
     }
 
@@ -158,6 +164,15 @@ public class get_card_infor {
         for (int i = 1; i < (card_rank.length - 2); i++) {
             if (card_rank[i].equals(card_rank[i + 1]) && card_rank[i].equals(card_rank[i + 2])) {
                 isThreeOfAKind = card_rank[i];
+
+                int count_kicker = 0;
+                for (int j = card_rank.length - 1; j >= 0; j--) {
+                    if (!card_rank[i].equals(card_rank[j])) {
+                        isThreeOfAKind_kicker[count_kicker] = card_rank[j];
+                        count_kicker++;
+                    }
+
+                }
                 return true;
             }
         }
@@ -166,9 +181,18 @@ public class get_card_infor {
 
     public boolean isTwoPair() {
         int count = 0;
-        for (int i = 1; i < (card_rank.length - 1); i++) {
+        for (int i = 0; i < (card_rank.length - 1); i++) {
             if (card_rank[i].equals(card_rank[i + 1])) {
                 isTwoPair[count] = card_rank[i];
+
+                if (i == 1) {
+                    isTwoPair_highestkick = card_rank[0];
+                }
+
+                if (i == 2) {
+                    isTwoPair_highestkick = card_rank[4];
+                }
+
                 count++;
             }
         }
@@ -179,6 +203,18 @@ public class get_card_infor {
         for (int i = 0; i < card_rank.length - 1; i++) {
             if (card_rank[i].equals(card_rank[i + 1])) {
                 isOnePair = card_rank[i];
+                System.out.println(card_rank[i]);
+
+                int count_kicker = 0;
+                // add kicker of Is One Pair
+                for (int j = card_rank.length - 1; j >= 0; j--) {
+                    if (!isOnePair.equals(card_rank[j])) {
+                        System.out.println(card_rank[j]);
+                        isOnePair_kicker[count_kicker] = card_rank[j];
+                        count_kicker++;
+                    }
+                }
+
                 return true;
             }
         }
@@ -251,17 +287,91 @@ public class get_card_infor {
                 case 7:
                     int index = compareString(isFullHouse[0], otherHand.isFullHouse[0]);
                     return (index == 0) ? compareString(isFullHouse[1], otherHand.isFullHouse[1]) : index;
-                case 6:
-                    return compareString(isFlush, otherHand.isFlush);
+                case 6: {
+                    int compare_index = compareString(isFlush, otherHand.isFlush);
+
+                    if (compare_index == 0) {
+                        // Compare the highest kicker
+                        compare_index = compareString(isFlush_sequence_rank[0], otherHand.isFlush_sequence_rank[0]);
+                    }
+
+                    if (compare_index == 0) {
+                        // Compare the second highest kicker
+                        compare_index = compareString(isFlush_sequence_rank[1], otherHand.isFlush_sequence_rank[1]);
+                    }
+
+                    if (compare_index == 0) {
+                        // Compare the third highest kicker
+                        compare_index = compareString(isFlush_sequence_rank[2], otherHand.isFlush_sequence_rank[2]);
+                    }
+
+                    if (compare_index == 0) {
+                        // Compare the fourth highest kicker
+                        compare_index = compareString(isFlush_sequence_rank[3], otherHand.isFlush_sequence_rank[3]);
+                    }
+
+                    return compare_index;
+                }
                 case 5:
                     return compareString(isStraight, otherHand.isStraight);
-                case 4:
-                    return compareString(isThreeOfAKind, otherHand.isThreeOfAKind);
-                case 3:
+                case 4: {
+                    int compare_index = compareString(isThreeOfAKind, otherHand.isThreeOfAKind);
+                    if (compare_index == 0) {
+                        // Compare the highest kicker
+                        compare_index = compareString(isThreeOfAKind_kicker[0], otherHand.isThreeOfAKind_kicker[0]);
+                    }
+
+                    if (compare_index == 0) {
+                        // Compare the second highest kicker
+                        compare_index = compareString(isThreeOfAKind_kicker[1], otherHand.isThreeOfAKind_kicker[0]);
+                    }
+
+                    if (compare_index == 0) {
+                        // Compare the second highest kicker
+                        compare_index = compareString(isThreeOfAKind_kicker[2], otherHand.isThreeOfAKind_kicker[0]);
+                    }
+
+                    return compare_index;
+
+                }
+                case 3: {
+                    // Compare the second pairs
                     int indexTwoPair = compareString(isTwoPair[1], otherHand.isTwoPair[1]);
-                    return (indexTwoPair == 0) ? compareString(isTwoPair[0], otherHand.isTwoPair[0]) : indexTwoPair;
-                case 2:
-                    return compareString(isOnePair, otherHand.isOnePair);
+
+                    // If the second pairs are equal, compare the first pairs
+                    if (indexTwoPair == 0) {
+                        indexTwoPair = compareString(isTwoPair[0], otherHand.isTwoPair[0]);
+                    }
+
+                    // If both pairs are equal, compare the highest kicker
+                    if (indexTwoPair == 0) {
+                        indexTwoPair = compareString(isTwoPair_highestkick, otherHand.isTwoPair_highestkick);
+                    }
+
+                    return indexTwoPair;
+                }
+
+                case 2: {
+                    int compare_index = compareString(isOnePair, otherHand.isOnePair);
+
+                    if (compare_index == 0) {
+                        // Compare the highest kicker
+                        compare_index = compareString(isOnePair_kicker[0], otherHand.isOnePair_kicker[0]);
+                    }
+
+                    if (compare_index == 0) {
+                        // Compare the highest kicker
+                        compare_index = compareString(isOnePair_kicker[1], otherHand.isOnePair_kicker[1]);
+                    }
+
+                    if (compare_index == 0) {
+                        // Compare the highest kicker
+                        compare_index = compareString(isOnePair_kicker[2], otherHand.isOnePair_kicker[2]);
+                    }
+
+                    return compare_index;
+                }
+
                 default:
                     if (Arrays.asList(card_rank).contains("A")) {
                         card_rank[4] = "Z";
