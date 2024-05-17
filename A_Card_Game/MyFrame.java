@@ -14,7 +14,7 @@ class MyFrame extends JFrame {
         this.setResizable(false);
         this.setLayout(null);
 
-        ImageIcon icon_image = new ImageIcon("A_Card_Game/IMAGE/icon.png"); // create an imageicon
+        ImageIcon icon_image = new ImageIcon("A_Card_Game/Background/icon.png"); // create an imageicon
         this.setIconImage(icon_image.getImage()); // change the default icon into new icon
 
         this.setVisible(true);

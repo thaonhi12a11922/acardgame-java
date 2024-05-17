@@ -92,7 +92,7 @@ public class get_card_infor {
             }
         }
         for (int j = card_rank.length - 2; j >= 0; j--) {
-            isFlush_sequence_rank[j] = card_suit[j];
+            isFlush_sequence_rank[j] = card_rank[j];
         }
         return true;
     }
@@ -304,22 +304,22 @@ public class get_card_infor {
 
                     if (compare_index == 0) {
                         // Compare the highest kicker
-                        compare_index = compareString(isFlush_sequence_rank[0], otherHand.isFlush_sequence_rank[0]);
+                        compare_index = compareString(isFlush_sequence_rank[3], otherHand.isFlush_sequence_rank[3]);
                     }
 
                     if (compare_index == 0) {
                         // Compare the second highest kicker
-                        compare_index = compareString(isFlush_sequence_rank[1], otherHand.isFlush_sequence_rank[1]);
-                    }
-
-                    if (compare_index == 0) {
-                        // Compare the third highest kicker
                         compare_index = compareString(isFlush_sequence_rank[2], otherHand.isFlush_sequence_rank[2]);
                     }
 
                     if (compare_index == 0) {
+                        // Compare the third highest kicker
+                        compare_index = compareString(isFlush_sequence_rank[1], otherHand.isFlush_sequence_rank[1]);
+                    }
+
+                    if (compare_index == 0) {
                         // Compare the fourth highest kicker
-                        compare_index = compareString(isFlush_sequence_rank[3], otherHand.isFlush_sequence_rank[3]);
+                        compare_index = compareString(isFlush_sequence_rank[0], otherHand.isFlush_sequence_rank[0]);
                     }
 
                     return compare_index;

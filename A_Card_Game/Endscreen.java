@@ -88,7 +88,7 @@ public class Endscreen extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 myFrame.dispose(); // Close the current frame
                 try {
-                    new Game();
+                    new Menu();
                 } catch (Exception e1) {
                     e1.printStackTrace();
                 }
@@ -105,8 +105,4 @@ public class Endscreen extends JFrame {
         buttonFrame.add(exitButton);
         return buttonFrame;
     }
-
-    // public static void main(String[] args) throws Exception {
-    // displayResult();
-    // }
 }
