@@ -13,6 +13,12 @@ public class Endscreen extends JFrame {
     static String endMusic = "A_Card_Game/Music/ending.wav";
 
     public static void displayResult(String word) throws Exception {
+
+        // Clear previous components
+        myFrame.getContentPane().removeAll();
+        myFrame.revalidate();
+        myFrame.repaint();
+
         MusicHandler.playMusic("A_Card_Game/Music/ending.wav");
 
         myFrame.getContentPane().setBackground(new Color(26, 145, 85));

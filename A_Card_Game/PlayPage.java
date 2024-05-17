@@ -99,6 +99,7 @@ public class PlayPage {
         myFrame = new MyFrame();
         randomFunction = new draw_random();
         customFont = new Font("Tahoma", Font.BOLD, 42);
+
     }
 
     private static JPanel createRoundPanel() throws Exception {
@@ -233,7 +234,7 @@ public class PlayPage {
         fold.setOpaque(true);
 
         // Initialize a counter for the number of clicks
-        final int[] clickCount = {0};
+        final int[] clickCount = { 0 };
 
         // Define the function for BET button
 
@@ -270,13 +271,27 @@ public class PlayPage {
 
         String result_;
         // Printing the result
-        if (result < 0) {
+        if (result > 0) {
             result_ = "YOU WIN!";
-        } else if (result > 0) {
+        } else if (result < 0) {
             result_ = "GAME OVER!";
         } else {
             result_ = "IT IS A TIE!";
         }
+
+        // Define the function for FOLD button
+        fold.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // dispose the screen
+                myFrame.dispose();
+                // show the GAME OVER page
+                try {
+                    Endscreen.displayResult("GAME OVER");
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
 
         bet.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -336,13 +351,13 @@ public class PlayPage {
                                 showResult2.setBackground(null);
                                 showResult2.setOpaque(true);
 
-                                JLabel hand1_result = new JLabel(hand1_category.toUpperCase(), JLabel.CENTER);
-                                hand1_result.setFont(new Font("Tahoma", Font.BOLD, 40));
-                                hand1_result.setForeground(new Color(243, 184, 184));
-
-                                JLabel hand2_result = new JLabel(hand2_category.toUpperCase(), JLabel.CENTER);
+                                JLabel hand2_result = new JLabel(hand1_category.toUpperCase(), JLabel.CENTER);
                                 hand2_result.setFont(new Font("Tahoma", Font.BOLD, 40));
                                 hand2_result.setForeground(new Color(243, 184, 184));
+
+                                JLabel hand1_result = new JLabel(hand2_category.toUpperCase(), JLabel.CENTER);
+                                hand1_result.setFont(new Font("Tahoma", Font.BOLD, 40));
+                                hand1_result.setForeground(new Color(243, 184, 184));
 
                                 showResult1.add(hand1_result);
                                 showResult2.add(hand2_result);
@@ -364,7 +379,15 @@ public class PlayPage {
                                     myFrame.dispose();
                                     try {
                                         MusicHandler.playMusic(endingMusic);
-                                        Endscreen.displayResult(result_);
+                                        System.out.println(result_);
+                                        if (result > 0) {
+                                            Endscreen.displayResult("YOU WIN");
+                                        } else if (result < 0) {
+                                            Endscreen.displayResult("GAME OVER");
+                                        } else {
+                                            Endscreen.displayResult("IT IS A TIE");
+                                        }
+
                                     } catch (Exception e1) {
                                         e1.printStackTrace();
                                     }
@@ -383,20 +406,6 @@ public class PlayPage {
                 }
             }
 
-        });
-
-        // Define the function for FOLD button
-        fold.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // dispose the screen
-                myFrame.dispose();
-                // show the GAME OVER page
-                try {
-                    Endscreen.displayResult("GAME OVER");
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-            }
         });
 
         // Add two buttons into panel

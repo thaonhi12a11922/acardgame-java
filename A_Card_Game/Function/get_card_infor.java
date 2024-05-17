@@ -91,7 +91,8 @@ public class get_card_infor {
                 return false;
             }
         }
-        for (int j = card_rank.length - 2; j >= 0; j--) {
+
+        for (int j = 3; j >= 0; j--) {
             isFlush_sequence_rank[j] = card_rank[j];
         }
         return true;

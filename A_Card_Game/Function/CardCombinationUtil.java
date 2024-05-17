@@ -56,7 +56,6 @@ public class CardCombinationUtil {
             int result = bestCardInfo.compare_to(currentCardInfo);
 
             if (result < 0) {
-                System.out.println("change ÂHH");
                 bestCards[0] = currentCard[0];
                 bestCards[1] = currentCard[1];
                 bestCards[2] = currentCard[2];
